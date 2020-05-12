@@ -59,7 +59,7 @@ export class ChiaClient {
         return result.data;
     };
 
-    public async getHeaderByHeight(height: string): Promise<BlockHeader> {
+    public async getHeaderByHeight(height: number): Promise<BlockHeader> {
         const result = await axios.post<BlockHeader>(`${this.baseUri()}/get_header_by_height`, {
             height
         });
@@ -75,7 +75,7 @@ export class ChiaClient {
         return result.data;
     };
 
-    public async getUnfinishedBlockHeaders(height: string): Promise<Array<BlockHeader>> {
+    public async getUnfinishedBlockHeaders(height: number): Promise<Array<BlockHeader>> {
         const result = await axios.post<Array<BlockHeader>>(`${this.baseUri()}/get_unfinished_block_headers`, {
             height
         });
