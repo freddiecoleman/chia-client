@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "foo"
+    "url": "https://github.com/freddiecoleman/chia-client"
   },
   "keywords": [
     "chia",
