@@ -22,7 +22,6 @@ interface BlockchainState {
     sync_mode: boolean;
     tip_hashes: Array<string>;
     tips: Array<BlockHeader>;
-
 }
 
 class Chia {
