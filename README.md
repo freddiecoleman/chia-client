@@ -7,7 +7,11 @@ TypeScript client for communicating with a [Chia](https://www.chia.net/) node us
 ```
 import { ChiaClient } from 'chia-client';
 
-const chiaClient = new ChiaClient();
+const chiaClient = new ChiaClient({
+    protocol: 'http',
+    hostname: 'localhost',
+    port: 8555
+});
 
 const blockchain = await chiaClient.getBlockchainState();
 ```
