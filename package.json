@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --runInBand test/",
     "prepare": "npm run build"
   },
   "repository": {
@@ -20,10 +20,27 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^25.2.1",
+    "jest": "^26.0.1",
     "ts-jest": "^25.5.1",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "axios": "^0.19.2"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/test",
+      "<rootDir>/src"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "restoreMocks": true,
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json",
+        "isolatedModules": true
+      }
+    }
   }
 }

@@ -24,7 +24,7 @@ interface BlockchainState {
     tips: Array<BlockHeader>;
 }
 
-class Chia {
+export class ChiaClient {
     private protocol: Protocol; 
     private hostname: string;
     private port: number;
@@ -35,19 +35,21 @@ class Chia {
         this.port = options?.port || defaultPort;
     }
 
-    private baseUri = () => `${this.protocol}://${this.hostname}:${this.port}`;
+    public baseUri() {
+        return `${this.protocol}://${this.hostname}:${this.port}`;
+    };
 
     public updateOptions(options: ChiaOptions): void {
         this.protocol = options.protocol || this.protocol;
         this.hostname = options.hostname || this.hostname;
         this.port = options.port || this.port;
-    }
+    };
 
     public async getBlockchainState(): Promise<BlockchainState> {
         const result = await axios.post<BlockchainState>(`${this.baseUri()}/get_blockchain_state`);
 
         return result.data;
-    }
+    };
 
     public async getBlock(headerHash: string): Promise<Block> {
         const result = await axios.post<Block>(`${this.baseUri()}/get_block`, {
@@ -55,7 +57,7 @@ class Chia {
         });
 
         return result.data;
-    }
+    };
 
     public async getHeaderByHeight(height: string): Promise<BlockHeader> {
         const result = await axios.post<BlockHeader>(`${this.baseUri()}/get_header_by_height`, {
@@ -63,7 +65,7 @@ class Chia {
         });
 
         return result.data;
-    }
+    };
 
     public async getHeader(hash: string): Promise<BlockHeader> {
         const result = await axios.post<BlockHeader>(`${this.baseUri()}/get_header`, {
@@ -71,7 +73,7 @@ class Chia {
         });
 
         return result.data;
-    }
+    };
 
     public async getUnfinishedBlockHeaders(height: string): Promise<Array<BlockHeader>> {
         const result = await axios.post<Array<BlockHeader>>(`${this.baseUri()}/get_unfinished_block_headers`, {
@@ -79,13 +81,13 @@ class Chia {
         });
 
         return result.data;
-    }
+    };
 
     public async getConnections(): Promise<Array<Connection>> {
         const result = await axios.post<Array<Connection>>(`${this.baseUri()}/get_connections`);
 
         return result.data;
-    }
+    };
 
     public async openConnection(host: string, port: number): Promise<void> {
         const result = await axios.post<void>(`${this.baseUri()}/open_connection`, {
@@ -94,7 +96,7 @@ class Chia {
         });
 
         return result.data;
-    }
+    };
 
     public async closeConnection(nodeId: string): Promise<void> {
         const result = await axios.post<void>(`${this.baseUri()}/close_connection`, {
@@ -102,7 +104,7 @@ class Chia {
         });
 
         return result.data;
-    }
+    };
 
     public async getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<void> {
         const result = await axios.post<void>(`${this.baseUri()}/get_unspent_coins`, {
@@ -111,19 +113,17 @@ class Chia {
         });
 
         return result.data;
-    }
+    };
 
     public async getHeaviestBlockSeen(): Promise<BlockHeader> {
         const result = await axios.post<BlockHeader>(`${this.baseUri()}/get_heaviest_block_seen`);
 
         return result.data;
-    }
+    };
 
     public async stopNode(): Promise<void> {
         const result = await axios.post<void>(`${this.baseUri()}/stop_node`);
 
         return result.data;
-    }
+    };
 }
-
-export default Chia;
