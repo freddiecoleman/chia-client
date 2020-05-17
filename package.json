@@ -1,6 +1,6 @@
 {
   "name": "chia-client",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TypeScript client for Chia node RPC interface",
   "main": "index.js",
   "scripts": {

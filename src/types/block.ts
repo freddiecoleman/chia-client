@@ -3,7 +3,7 @@ export interface BlockHeader {
         additions_root: string;
         aggregated_signature: null | string;
         coinbase: {
-            amount: number;
+            amount: string;
             parent_coin_info: string;
             puzzle_hash: string;
         },
@@ -13,7 +13,7 @@ export interface BlockHeader {
         cost: number;
         extension_data: string;
         fees_coin: {
-            amount: number;
+            amount: string;
             parent_coin_info: string;
             puzzle_hash: string;
         },
