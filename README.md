@@ -29,3 +29,7 @@ const blockchain = await chiaClient.getBlockchainState();
 - `getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<void>`
 - `getHeaviestBlockSeen(): Promise<BlockHeader>`
 - `stopNode(): Promise<void>`
+
+### Credits
+
+This client is provided by [Chia Blockchain Explorer](https://www.chiaexplorer.com).
