@@ -1,7 +1,9 @@
 export interface BlockHeader {
     data: {
         additions_root: string;
-        aggregated_signature: null | string;
+        aggregated_signature: null | {
+            sig: string;
+        };
         coinbase: {
             amount: string;
             parent_coin_info: string;
