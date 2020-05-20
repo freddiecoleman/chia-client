@@ -42,7 +42,7 @@ export interface ProofOfSpace {
 
 export interface ProofOfTime {
     challenge_hash: string;
-    number_of_iterations: number;
+    number_of_iterations: string;
     output: { [key: string]: string; };
     witness: string;
     witness_type: number;
