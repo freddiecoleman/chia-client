@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Block, BlockHeader } from './src/types/block';
 import { Connection } from './src/types/connection';
+import { Coin } from './src/types/coin';
 
 const defaultProtocol = 'http';
 const defaultHostname = 'localhost';
@@ -106,8 +107,8 @@ export class ChiaClient {
         return result.data;
     };
 
-    public async getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<void> {
-        const result = await axios.post<void>(`${this.baseUri()}/get_unspent_coins`, {
+    public async getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<Coin[]> {
+        const result = await axios.post<Coin[]>(`${this.baseUri()}/get_unspent_coins`, {
             puzzle_hash: puzzleHash,
             header_hash: headerHash
         });
