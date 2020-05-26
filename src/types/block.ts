@@ -1,3 +1,5 @@
+import { RpcResponse } from './rpc';
+
 export interface BlockHeader {
     data: {
         additions_root: string;
@@ -54,4 +56,17 @@ export interface Block {
     proof_of_time: ProofOfTime;
     transactions_filter: null | string;
     transactions_generator: null | string;
+}
+
+
+export interface UnfinishedBlockHeadersResponse extends RpcResponse {
+    headers: BlockHeader[];
+}
+
+export interface HeaderResponse extends RpcResponse {
+    header: BlockHeader;
+}
+
+export interface BlockResponse extends RpcResponse {
+    block: Block;
 }

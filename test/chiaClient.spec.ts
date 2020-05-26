@@ -66,36 +66,6 @@ describe('chia client', () => {
             expect(await chiaClient.getUnfinishedBlockHeaders(42)).toEqual('success');
         });
 
-        it('calls get_connections', async() => {
-            nock('http://localhost:8555')
-                .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_connections')
-                .reply(200, 'success');
-            
-            expect(await chiaClient.getConnections()).toEqual('success');
-        });
-
-        it('calls open_connection with host and port in body', async() => {
-            nock('http://localhost:8555')
-                .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/open_connection', {
-                    host: 'chia.net',
-                    port: 80
-                })
-                .reply(200, 'success');
-            
-            expect(await chiaClient.openConnection('chia.net', 80)).toEqual('success');
-        });
-
-        it('calls open_connection with node_id in body', async() => {
-            nock('http://localhost:8555')
-                .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/close_connection', { node_id: 'fakeNodeId' })
-                .reply(200, 'success');
-            
-            expect(await chiaClient.closeConnection('fakeNodeId')).toEqual('success');
-        });
-
         it('calls get_unspent_coins with puzzle_hash and header_hash in body', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })

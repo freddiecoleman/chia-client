@@ -1,7 +1,10 @@
 import axios from 'axios';
-import { Block, BlockHeader } from './src/types/block';
+import { BlockchainStateResponse } from './src/types/blockchain';
+import { BlockResponse, UnfinishedBlockHeadersResponse, HeaderResponse } from './src/types/block';
 import { Connection } from './src/types/connection';
-import { Coin } from './src/types/coin';
+import { CoinResponse } from './src/types/coin';
+import { NetspaceResponse } from './src/types/netspace';
+import { TipResponse } from './src/types/tip';
 
 const defaultProtocol = 'http';
 const defaultHostname = 'localhost';
@@ -13,16 +16,6 @@ interface ChiaOptions {
     protocol?: Protocol;
     hostname?: string;
     port?: number;
-}
-
-interface BlockchainState {
-    difficulty: number;
-    ips: number;
-    lca: BlockHeader;
-    min_iters: number;
-    sync_mode: boolean;
-    tip_hashes: Array<string>;
-    tips: Array<BlockHeader>;
 }
 
 export class ChiaClient {
@@ -46,38 +39,44 @@ export class ChiaClient {
         this.port = options.port || this.port;
     };
 
-    public async getBlockchainState(): Promise<BlockchainState> {
-        const result = await axios.post<BlockchainState>(`${this.baseUri()}/get_blockchain_state`);
+    public async getBlockchainState(): Promise<BlockchainStateResponse> {
+        const result = await axios.post<BlockchainStateResponse>(`${this.baseUri()}/get_blockchain_state`);
 
         return result.data;
     };
 
-    public async getBlock(headerHash: string): Promise<Block> {
-        const result = await axios.post<Block>(`${this.baseUri()}/get_block`, {
+    public async getNetworkSpace(): Promise<NetspaceResponse> {
+        const result = await axios.post<NetspaceResponse>(`${this.baseUri()}/get_network_space`);
+
+        return result.data;
+    };
+
+    public async getBlock(headerHash: string): Promise<BlockResponse> {
+        const result = await axios.post<BlockResponse>(`${this.baseUri()}/get_block`, {
             header_hash: headerHash
         });
 
         return result.data;
     };
 
-    public async getHeaderByHeight(height: number): Promise<BlockHeader> {
-        const result = await axios.post<BlockHeader>(`${this.baseUri()}/get_header_by_height`, {
+    public async getHeaderByHeight(height: number): Promise<HeaderResponse> {
+        const result = await axios.post<HeaderResponse>(`${this.baseUri()}/get_header_by_height`, {
             height
         });
 
         return result.data;
     };
 
-    public async getHeader(hash: string): Promise<BlockHeader> {
-        const result = await axios.post<BlockHeader>(`${this.baseUri()}/get_header`, {
+    public async getHeader(hash: string): Promise<HeaderResponse> {
+        const result = await axios.post<HeaderResponse>(`${this.baseUri()}/get_header`, {
             header_hash: hash
         });
 
         return result.data;
     };
 
-    public async getUnfinishedBlockHeaders(height: number): Promise<Array<BlockHeader>> {
-        const result = await axios.post<Array<BlockHeader>>(`${this.baseUri()}/get_unfinished_block_headers`, {
+    public async getUnfinishedBlockHeaders(height: number): Promise<Array<UnfinishedBlockHeadersResponse>> {
+        const result = await axios.post<Array<UnfinishedBlockHeadersResponse>>(`${this.baseUri()}/get_unfinished_block_headers`, {
             height
         });
 
@@ -107,8 +106,8 @@ export class ChiaClient {
         return result.data;
     };
 
-    public async getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<Coin[]> {
-        const result = await axios.post<Coin[]>(`${this.baseUri()}/get_unspent_coins`, {
+    public async getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<CoinResponse> {
+        const result = await axios.post<CoinResponse>(`${this.baseUri()}/get_unspent_coins`, {
             puzzle_hash: puzzleHash,
             header_hash: headerHash
         });
@@ -116,8 +115,8 @@ export class ChiaClient {
         return result.data;
     };
 
-    public async getHeaviestBlockSeen(): Promise<BlockHeader> {
-        const result = await axios.post<BlockHeader>(`${this.baseUri()}/get_heaviest_block_seen`);
+    public async getHeaviestBlockSeen(): Promise<TipResponse> {
+        const result = await axios.post<TipResponse>(`${this.baseUri()}/get_heaviest_block_seen`);
 
         return result.data;
     };
