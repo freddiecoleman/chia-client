@@ -44,8 +44,11 @@ export class ChiaClient {
         return result.data;
     };
 
-    public async getNetworkSpace(): Promise<NetspaceResponse> {
-        const result = await axios.post<NetspaceResponse>(`${this.baseUri()}/get_network_space`);
+    public async getNetworkSpace(newerBlockHeaderHash: string, olderBlockHeaderHash: string): Promise<NetspaceResponse> {
+        const result = await axios.post<NetspaceResponse>(`${this.baseUri()}/get_network_space`, {
+            newer_block_header_hash: newerBlockHeaderHash,
+            older_block_header_hash: olderBlockHeaderHash
+        });
 
         return result.data;
     };
