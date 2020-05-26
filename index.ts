@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { BlockchainStateResponse } from './src/types/blockchain';
 import { BlockResponse, UnfinishedBlockHeadersResponse, HeaderResponse } from './src/types/block';
-import { Connection } from './src/types/connection';
 import { CoinResponse } from './src/types/coin';
 import { NetspaceResponse } from './src/types/netspace';
 import { TipResponse } from './src/types/tip';
@@ -78,29 +77,6 @@ export class ChiaClient {
     public async getUnfinishedBlockHeaders(height: number): Promise<Array<UnfinishedBlockHeadersResponse>> {
         const result = await axios.post<Array<UnfinishedBlockHeadersResponse>>(`${this.baseUri()}/get_unfinished_block_headers`, {
             height
-        });
-
-        return result.data;
-    };
-
-    public async getConnections(): Promise<Array<Connection>> {
-        const result = await axios.post<Array<Connection>>(`${this.baseUri()}/get_connections`);
-
-        return result.data;
-    };
-
-    public async openConnection(host: string, port: number): Promise<void> {
-        const result = await axios.post<void>(`${this.baseUri()}/open_connection`, {
-            host,
-            port
-        });
-
-        return result.data;
-    };
-
-    public async closeConnection(nodeId: string): Promise<void> {
-        const result = await axios.post<void>(`${this.baseUri()}/close_connection`, {
-            node_id: nodeId
         });
 
         return result.data;
