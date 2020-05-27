@@ -39,7 +39,7 @@ export class ChiaClient {
     };
 
     public async getBlockchainState(): Promise<BlockchainStateResponse> {
-        const result = await axios.post<BlockchainStateResponse>(`${this.baseUri()}/get_blockchain_state`);
+        const result = await axios.post<BlockchainStateResponse>(`${this.baseUri()}/get_blockchain_state`, {});
 
         return result.data;
     };
@@ -95,13 +95,7 @@ export class ChiaClient {
     };
 
     public async getHeaviestBlockSeen(): Promise<TipResponse> {
-        const result = await axios.post<TipResponse>(`${this.baseUri()}/get_heaviest_block_seen`);
-
-        return result.data;
-    };
-
-    public async stopNode(): Promise<void> {
-        const result = await axios.post<void>(`${this.baseUri()}/stop_node`);
+        const result = await axios.post<TipResponse>(`${this.baseUri()}/get_heaviest_block_seen`, {});
 
         return result.data;
     };
