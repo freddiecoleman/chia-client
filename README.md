@@ -18,17 +18,14 @@ const blockchain = await chiaClient.getBlockchainState();
 
 ### API
 
-- `getBlockchainState(): Promise<BlockchainState>`
-- `getBlock(headerHash: string): Promise<Block>`
-- `getHeaderByHeight(height: number): Promise<BlockHeader>`
-- `getHeader(hash: string): Promise<BlockHeader>`
-- `getUnfinishedBlockHeaders(height: number): Promise<Array<BlockHeader>>`
-- `getConnections(): Promise<Array<Connection>>`
-- `openConnection(host: string, port: number): Promise<void>`
-- `closeConnection(nodeId: string): Promise<void>`
-- `getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<void>`
-- `getHeaviestBlockSeen(): Promise<BlockHeader>`
-- `stopNode(): Promise<void>`
+- `getBlockchainState(): Promise<BlockchainStateResponse>`
+- `getBlock(headerHash: string): Promise<BlockResponse>`
+- `getHeaderByHeight(height: number): Promise<HeaderResponse>`
+- `getHeader(hash: string): Promise<HeaderResponse>`
+- `getUnfinishedBlockHeaders(height: number): Promise<UnfinishedBlockHeadersResponse>`
+- `getNetworkSpace(newerBlockHeaderHash: string, olderBlockHeaderHash: string): Promise<NetspaceResponse>`
+- `getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<CoinResponse>`
+- `getHeaviestBlockSeen(): Promise<TipResponse>`
 
 ### Credits
 

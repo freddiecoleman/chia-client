@@ -77,8 +77,8 @@ export class ChiaClient {
         return result.data;
     };
 
-    public async getUnfinishedBlockHeaders(height: number): Promise<Array<UnfinishedBlockHeadersResponse>> {
-        const result = await axios.post<Array<UnfinishedBlockHeadersResponse>>(`${this.baseUri()}/get_unfinished_block_headers`, {
+    public async getUnfinishedBlockHeaders(height: number): Promise<UnfinishedBlockHeadersResponse> {
+        const result = await axios.post<UnfinishedBlockHeadersResponse>(`${this.baseUri()}/get_unfinished_block_headers`, {
             height
         });
 
