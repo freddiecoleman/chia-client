@@ -1,16 +1,22 @@
 {
     "compilerOptions": {
-        "lib": ["es2018"],
+        "lib": [
+            "es2018"
+        ],
         "target": "ES2018",
         "module": "commonjs",
         "strict": true,
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "types": ["jest"],
+        "types": [
+            "jest"
+        ],
         "sourceMap": true
     },
-    "include": ["./"],
+    "include": [
+        "./"
+    ],
     "exclude": [
         "./node_modules",
         "./test"

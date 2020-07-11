@@ -2,42 +2,34 @@ import { RpcResponse } from './rpc';
 
 export interface BlockHeader {
     data: {
-        additions_root: string;
+        dditions_root: string;
         aggregated_signature: null | {
             sig: string;
         };
-        coinbase: {
-            amount: string;
-            parent_coin_info: string;
-            puzzle_hash: string;
-        },
-        coinbase_signature: {
-            sig: string;
-        },
-        cost: number;
+        cost: string;
         extension_data: string;
-        fees_coin: {
-            amount: string;
-            parent_coin_info: string;
-            puzzle_hash: string;
-        },
+        farmer_rewards_puzzle_hash: string;
         filter_hash: string;
         generator_hash: string;
         height: number;
+        pool_target: {
+            max_height: number;
+            puzzle_hash: string;
+        };
         prev_header_hash: string;
         proof_of_space_hash: string;
         removals_root: string;
-        timestamp: number;
-        total_iters: number;
-        weight: number;
+        timestamp: string;
+        total_iters: string;
+        weight: string;
     };
     harvester_signature: string;
 }
 
 export interface ProofOfSpace {
     challenge_hash: string;
-    plot_pubkey: string;
-    pool_pubkey: string;
+    plot_public_key: string;
+    pool_public_key: string;
     proof: string;
     size: number;
 }
@@ -45,7 +37,10 @@ export interface ProofOfSpace {
 export interface ProofOfTime {
     challenge_hash: string;
     number_of_iterations: string;
-    output: { [key: string]: string; };
+    output: {
+        a: string;
+        b: string;
+    };
     witness: string;
     witness_type: number;
 }
