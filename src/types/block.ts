@@ -2,7 +2,7 @@ import { RpcResponse } from './rpc';
 
 export interface BlockHeader {
     data: {
-        dditions_root: string;
+        additions_root: string;
         aggregated_signature: null | {
             sig: string;
         };
