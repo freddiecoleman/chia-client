@@ -4,6 +4,8 @@ import { BlockResponse, UnfinishedBlockHeadersResponse, HeaderResponse } from '.
 import { CoinResponse } from './src/types/coin';
 import { NetspaceResponse } from './src/types/netspace';
 import { TipResponse } from './src/types/tip';
+import { hashHeader } from './src/utils/header';
+import { generatePlotId } from './src/utils/plotId';
 
 const defaultProtocol = 'http';
 const defaultHostname = 'localhost';
@@ -17,7 +19,7 @@ interface ChiaOptions {
     port?: number;
 }
 
-export class ChiaClient {
+class ChiaClient {
     private protocol: Protocol; 
     private hostname: string;
     private port: number;
@@ -100,3 +102,9 @@ export class ChiaClient {
         return result.data;
     };
 }
+
+export {
+    ChiaClient,
+    hashHeader,
+    generatePlotId
+};
