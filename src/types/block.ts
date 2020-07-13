@@ -3,7 +3,7 @@ import { RpcResponse } from './rpc';
 export interface BlockHeader {
     data: {
         additions_root: string;
-        aggregated_signature: { sig: string; };
+        aggregated_signature: string;
         cost: string;
         extension_data: string;
         farmer_rewards_puzzle_hash: string;
@@ -22,7 +22,7 @@ export interface BlockHeader {
         total_transaction_fees: string;
         weight: string;
     };
-    harvester_signature: string;
+    plot_signature: string;
 }
 
 export interface ProofOfSpace {
