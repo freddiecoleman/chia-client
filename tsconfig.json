@@ -9,10 +9,6 @@
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "types": [
-            "jest",
-            "node"
-        ],
         "sourceMap": true
     },
     "include": [
