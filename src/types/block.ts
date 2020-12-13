@@ -1,3 +1,4 @@
+import { Coin } from './coin';
 import { RpcResponse } from './rpc';
 
 export interface BlockHeader {
@@ -52,8 +53,12 @@ export interface Block {
     transactions_generator: null | string;
 }
 
+// TODO: WIP
+export interface SubBlockRecord {
 
-export interface UnfinishedBlockHeadersResponse extends RpcResponse {
+}
+
+export interface UnfinishedSubBlockHeadersResponse extends RpcResponse {
     headers: BlockHeader[];
 }
 
@@ -61,6 +66,15 @@ export interface HeaderResponse extends RpcResponse {
     header: BlockHeader;
 }
 
-export interface BlockResponse extends RpcResponse {
-    block: Block;
+export interface SubBlockResponse extends RpcResponse {
+    sub_block: Block;
+}
+
+export interface SubBlockRecordResponse extends RpcResponse {
+    sub_block_record: SubBlockRecord;
+}
+
+export interface AdditionsAndRemovalsResponse extends RpcResponse {
+    additions: Array<Coin>;
+    removals: Array<Coin>;
 }

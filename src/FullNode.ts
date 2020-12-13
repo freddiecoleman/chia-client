@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BlockchainStateResponse } from './types/blockchain';
-import { BlockResponse, UnfinishedBlockHeadersResponse, HeaderResponse } from './types/block';
+import { SubBlockRecord, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse } from './types/block';
 import { CoinResponse } from './types/coin';
 import { NetspaceResponse } from './types/netspace';
 import { TipResponse } from './types/tip';
@@ -30,26 +30,26 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getBlock(headerHash: string): Promise<BlockResponse> {
-        return this.request<BlockResponse>('get_block', {
+    public async getSubBlock(headerHash: string): Promise<SubBlockResponse> {
+        return this.request<SubBlockResponse>('get_sub_block', {
             header_hash: headerHash
         });
     };
 
-    public async getHeaderByHeight(height: number): Promise<HeaderResponse> {
-        return this.request<HeaderResponse>('get_header_by_height', {
+    public async getSubBlockRecordBySubHeight(height: number): Promise<SubBlockRecord> {
+        return this.request<SubBlockRecord>('get_sub_block_record_by_sub_height', {
             height
         });
     };
 
-    public async getHeader(hash: string): Promise<HeaderResponse> {
-        return this.request<HeaderResponse>('get_header', {
+    public async getSubBlockRecord(hash: string): Promise<SubBlockRecordResponse> {
+        return this.request<SubBlockRecordResponse>('get_sub_block_record', {
             header_hash: hash
         });
     };
 
-    public async getUnfinishedBlockHeaders(height: number): Promise<UnfinishedBlockHeadersResponse> {
-        return this.request<UnfinishedBlockHeadersResponse>('get_unfinished_block_headers', {
+    public async getUnfinishedSubBlockHeaders(height: number): Promise<UnfinishedSubBlockHeadersResponse> {
+        return this.request<UnfinishedSubBlockHeadersResponse>('get_unfinished_sub_block_headers', {
             height
         });
     };
@@ -61,8 +61,8 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getHeaviestBlockSeen(): Promise<TipResponse> {
-        return this.request<TipResponse>('get_heaviest_block_seen', {});
+    public async getAdditionsAndRemovals(): Promise<TipResponse> {
+        return this.request<TipResponse>('get_additions_and_removals', {});
     };
 }
 
