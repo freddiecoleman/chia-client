@@ -1,25 +1,9 @@
 import nock from 'nock';
-import { ChiaClient } from '../index';
+import { FullNode } from '../index';
 
 describe('chia client', () => {
-    it('sets a default uri', () => {
-        const chiaClient = new ChiaClient();
-
-        expect(chiaClient.baseUri()).toBe('http://localhost:8555');
-    });
-
-    it('uses options to connect to a different uri', () => {
-        const chiaClient = new ChiaClient({
-            protocol: 'https',
-            hostname: 'chia.net',
-            port: 80
-        });
-
-        expect(chiaClient.baseUri()).toBe('https://chia.net:80');
-    });
-
     describe('RPC calls', () => {
-        const chiaClient = new ChiaClient();
+        const chiaClient = new FullNode();
 
         it('calls get_blockchain_state', async() => {
             nock('http://localhost:8555')
@@ -85,15 +69,6 @@ describe('chia client', () => {
                 .reply(200, 'success');
             
             expect(await chiaClient.getHeaviestBlockSeen()).toEqual('success');
-        });
-
-        it('calls stop_node', async() => {
-            nock('http://localhost:8555')
-                .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/stop_node')
-                .reply(200, 'success');
-            
-            expect(await chiaClient.stopNode()).toEqual('success');
         });
     });
 });
