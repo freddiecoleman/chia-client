@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "declaration": true,
         "lib": [
             "es2018"
         ],
@@ -9,13 +10,15 @@
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "outDir": "dist"
     },
     "include": [
         "./"
     ],
     "exclude": [
         "./node_modules",
-        "./test"
+        "./test",
+        "./dist"
     ]
 }

@@ -2,7 +2,7 @@
   "name": "chia-client",
   "version": "2.2.0",
   "description": "TypeScript client for Chia node peer RPC interface",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest --runInBand test/",
