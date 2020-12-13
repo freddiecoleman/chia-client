@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { BlockchainStateResponse } from './types/blockchain';
-import { SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse } from './types/block';
+import { SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/block';
 import { CoinResponse } from './types/coin';
 import { NetspaceResponse } from './types/netspace';
-import { TipResponse } from './types/tip';
 import { ChiaOptions, RpcClient } from './RpcClient';
 
 const defaultProtocol = 'http';
@@ -61,8 +60,8 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getAdditionsAndRemovals(): Promise<TipResponse> {
-        return this.request<TipResponse>('get_additions_and_removals', {});
+    public async getAdditionsAndRemovals(): Promise<AdditionsAndRemovalsResponse> {
+        return this.request<AdditionsAndRemovalsResponse>('get_additions_and_removals', {});
     };
 }
 
