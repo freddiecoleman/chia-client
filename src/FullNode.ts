@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BlockchainStateResponse } from './types/blockchain';
-import { SubBlockRecord, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse } from './types/block';
+import { SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse } from './types/block';
 import { CoinResponse } from './types/coin';
 import { NetspaceResponse } from './types/netspace';
 import { TipResponse } from './types/tip';
@@ -36,8 +36,8 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getSubBlockRecordBySubHeight(height: number): Promise<SubBlockRecord> {
-        return this.request<SubBlockRecord>('get_sub_block_record_by_sub_height', {
+    public async getSubBlockRecordBySubHeight(height: number): Promise<SubBlockRecordResponse> {
+        return this.request<SubBlockRecordResponse>('get_sub_block_record_by_sub_height', {
             height
         });
     };
