@@ -5,15 +5,15 @@ TypeScript client for communicating with a [Chia](https://www.chia.net/) node us
 ### Example
 
 ```
-import { ChiaClient } from 'chia-client';
+import { FullNode } from 'chia-client';
 
-const chiaClient = new ChiaClient({
+const fullNode = new FullNode({
     protocol: 'http',
     hostname: 'localhost',
     port: 8555
 });
 
-const blockchain = await chiaClient.getBlockchainState();
+const blockchain = await fullNode.getBlockchainState();
 ```
 
 ### API
