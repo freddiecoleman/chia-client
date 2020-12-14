@@ -26,7 +26,7 @@ describe('chia client', () => {
         it('calls get_sub_block_record_by_sub_height with height in body', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_sub_block_record_by_sub_height', { height: 42 })
+                .post('/get_sub_block_record_by_sub_height', { sub_height: 42 })
                 .reply(200, 'success');
             
             expect(await chiaClient.getSubBlockRecordBySubHeight(42)).toEqual('success');
@@ -44,7 +44,7 @@ describe('chia client', () => {
         it('calls get_unfinished_sub_block_headers with header_hash in body', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_unfinished_sub_block_headers', { height: 42 })
+                .post('/get_unfinished_sub_block_headers', { sub_height: 42 })
                 .reply(200, 'success');
             
             expect(await chiaClient.getUnfinishedSubBlockHeaders(42)).toEqual('success');
@@ -65,10 +65,10 @@ describe('chia client', () => {
         it('calls get_additions_and_removals', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_additions_and_removals')
+                .post('/get_additions_and_removals', { header_hash: 'fakeHeaderHash' })
                 .reply(200, 'success');
             
-            expect(await chiaClient.getAdditionsAndRemovals()).toEqual('success');
+            expect(await chiaClient.getAdditionsAndRemovals('fakeHeaderHash')).toEqual('success');
         });
     });
 });

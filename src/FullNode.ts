@@ -35,9 +35,9 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getSubBlockRecordBySubHeight(height: number): Promise<SubBlockRecordResponse> {
+    public async getSubBlockRecordBySubHeight(subHeight: number): Promise<SubBlockRecordResponse> {
         return this.request<SubBlockRecordResponse>('get_sub_block_record_by_sub_height', {
-            height
+            sub_height: subHeight
         });
     };
 
@@ -47,9 +47,9 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getUnfinishedSubBlockHeaders(height: number): Promise<UnfinishedSubBlockHeadersResponse> {
+    public async getUnfinishedSubBlockHeaders(subHeight: number): Promise<UnfinishedSubBlockHeadersResponse> {
         return this.request<UnfinishedSubBlockHeadersResponse>('get_unfinished_sub_block_headers', {
-            height
+            sub_height: subHeight
         });
     };
 
@@ -60,8 +60,10 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getAdditionsAndRemovals(): Promise<AdditionsAndRemovalsResponse> {
-        return this.request<AdditionsAndRemovalsResponse>('get_additions_and_removals', {});
+    public async getAdditionsAndRemovals(hash: string): Promise<AdditionsAndRemovalsResponse> {
+        return this.request<AdditionsAndRemovalsResponse>('get_additions_and_removals', {
+            header_hash: hash
+        });
     };
 }
 

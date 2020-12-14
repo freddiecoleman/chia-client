@@ -1,4 +1,4 @@
-import { Coin } from './coin';
+import { CoinRecord } from './coin';
 import { RpcResponse } from './rpc';
 
 export interface BlockHeader {
@@ -75,6 +75,6 @@ export interface SubBlockRecordResponse extends RpcResponse {
 }
 
 export interface AdditionsAndRemovalsResponse extends RpcResponse {
-    additions: Array<Coin>;
-    removals: Array<Coin>;
+    additions: Array<CoinRecord>;
+    removals: Array<CoinRecord>;
 }

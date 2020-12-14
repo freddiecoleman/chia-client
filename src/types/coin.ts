@@ -1,6 +1,6 @@
 import { RpcResponse } from './rpc';
 
-export interface Coin {
+export interface CoinRecord {
     coin: {
         amount: string;
         parent_coin_info: string;
@@ -13,5 +13,5 @@ export interface Coin {
 };
 
 export interface CoinResponse extends RpcResponse {
-    coin_records: Array<Coin>;
+    coin_records: Array<CoinRecord>;
 }
