@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { BlockchainStateResponse } from './types/blockchain';
-import { SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/block';
+import { BlocksResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/block';
 import { CoinResponse } from './types/coin';
 import { NetspaceResponse } from './types/netspace';
 import { ChiaOptions, RpcClient } from './RpcClient';
@@ -26,6 +25,13 @@ class FullNode extends RpcClient {
         return this.request<NetspaceResponse>('get_network_space', {
             newer_block_header_hash: newerBlockHeaderHash,
             older_block_header_hash: olderBlockHeaderHash
+        });
+    };
+
+    public async getBkicjs(start: number, end: number): Promise<BlocksResponse> {
+        return this.request<BlocksResponse>('get_blocks', {
+            start,
+            end
         });
     };
 

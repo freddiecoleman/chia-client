@@ -66,6 +66,10 @@ export interface HeaderResponse extends RpcResponse {
     header: BlockHeader;
 }
 
+export interface BlocksResponse extends RpcResponse {
+    blocks: any[]; // TODO: WIP
+}
+
 export interface SubBlockResponse extends RpcResponse {
     sub_block: Block;
 }
