@@ -1,6 +1,4 @@
-import { RpcResponse } from './rpc';
-
-export interface Coin {
+export interface CoinRecord {
     coin: {
         amount: string;
         parent_coin_info: string;
@@ -10,8 +8,5 @@ export interface Coin {
     confirmed_block_index: number;
     spent: boolean;
     spent_block_index: number;
+    timestamp: string;
 };
-
-export interface CoinResponse extends RpcResponse {
-    coin_records: Array<Coin>;
-}

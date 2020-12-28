@@ -14,40 +14,40 @@ describe('chia client', () => {
             expect(await chiaClient.getBlockchainState()).toEqual('success');
         });
 
-        it('calls get_block with header_hash in body', async() => {
+        it('calls get_sub_block with header_hash in body', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_block', { header_hash: 'fakeHeaderHash' })
+                .post('/get_sub_block', { header_hash: 'fakeHeaderHash' })
                 .reply(200, 'success');
             
-            expect(await chiaClient.getBlock('fakeHeaderHash')).toEqual('success');
+            expect(await chiaClient.getSubBlock('fakeHeaderHash')).toEqual('success');
         });
 
-        it('calls get_header_by_height with height in body', async() => {
+        it('calls get_sub_block_record_by_sub_height with height in body', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_header_by_height', { height: 42 })
+                .post('/get_sub_block_record_by_sub_height', { sub_height: 42 })
                 .reply(200, 'success');
             
-            expect(await chiaClient.getHeaderByHeight(42)).toEqual('success');
+            expect(await chiaClient.getSubBlockRecordBySubHeight(42)).toEqual('success');
         });
 
-        it('calls get_header with header_hash in body', async() => {
+        it('calls get_sub_block_record with header_hash in body', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_header', { header_hash: 'fakeHeaderHash' })
+                .post('/get_sub_block_record', { header_hash: 'fakeHeaderHash' })
                 .reply(200, 'success');
             
-            expect(await chiaClient.getHeader('fakeHeaderHash')).toEqual('success');
+            expect(await chiaClient.getSubBlockRecord('fakeHeaderHash')).toEqual('success');
         });
 
-        it('calls get_unfinished_block_headers with header_hash in body', async() => {
+        it('calls get_unfinished_sub_block_headers with header_hash in body', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_unfinished_block_headers', { height: 42 })
+                .post('/get_unfinished_sub_block_headers', { sub_height: 42 })
                 .reply(200, 'success');
             
-            expect(await chiaClient.getUnfinishedBlockHeaders(42)).toEqual('success');
+            expect(await chiaClient.getUnfinishedSubBlockHeaders(42)).toEqual('success');
         });
 
         it('calls get_unspent_coins with puzzle_hash and header_hash in body', async() => {
@@ -62,13 +62,13 @@ describe('chia client', () => {
             expect(await chiaClient.getUnspentCoins('fakePuzzleHash', 'fakeHeaderHash')).toEqual('success');
         });
 
-        it('calls get_heaviest_block_seen', async() => {
+        it('calls get_additions_and_removals', async() => {
             nock('http://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-                .post('/get_heaviest_block_seen')
+                .post('/get_additions_and_removals', { header_hash: 'fakeHeaderHash' })
                 .reply(200, 'success');
             
-            expect(await chiaClient.getHeaviestBlockSeen()).toEqual('success');
+            expect(await chiaClient.getAdditionsAndRemovals('fakeHeaderHash')).toEqual('success');
         });
     });
 });

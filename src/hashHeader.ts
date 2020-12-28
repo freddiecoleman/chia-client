@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { BlockHeader } from './types/block';
+import { BlockHeader } from './types/BlockHeader';
 
 function big_int_to_array(x: bigint, num_bytes: number) {
     let truncated = BigInt.asUintN(num_bytes * 8, x);

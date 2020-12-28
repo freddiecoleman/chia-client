@@ -1,9 +1,4 @@
-import axios from 'axios';
-import { BlockchainStateResponse } from './types/blockchain';
-import { BlockResponse, UnfinishedBlockHeadersResponse, HeaderResponse } from './types/block';
-import { CoinResponse } from './types/coin';
-import { NetspaceResponse } from './types/netspace';
-import { TipResponse } from './types/tip';
+import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
 import { ChiaOptions, RpcClient } from './RpcClient';
 
 const defaultProtocol = 'http';
@@ -30,27 +25,35 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getBlock(headerHash: string): Promise<BlockResponse> {
-        return this.request<BlockResponse>('get_block', {
+    public async getBlocks(start: number, end: number): Promise<BlocksResponse> {
+        return this.request<BlocksResponse>('get_blocks', {
+            start,
+            end,
+            exclude_header_hash: true
+        });
+    };
+
+    public async getSubBlock(headerHash: string): Promise<SubBlockResponse> {
+        return this.request<SubBlockResponse>('get_sub_block', {
             header_hash: headerHash
         });
     };
 
-    public async getHeaderByHeight(height: number): Promise<HeaderResponse> {
-        return this.request<HeaderResponse>('get_header_by_height', {
-            height
+    public async getSubBlockRecordBySubHeight(subHeight: number): Promise<SubBlockRecordResponse> {
+        return this.request<SubBlockRecordResponse>('get_sub_block_record_by_sub_height', {
+            sub_height: subHeight
         });
     };
 
-    public async getHeader(hash: string): Promise<HeaderResponse> {
-        return this.request<HeaderResponse>('get_header', {
+    public async getSubBlockRecord(hash: string): Promise<SubBlockRecordResponse> {
+        return this.request<SubBlockRecordResponse>('get_sub_block_record', {
             header_hash: hash
         });
     };
 
-    public async getUnfinishedBlockHeaders(height: number): Promise<UnfinishedBlockHeadersResponse> {
-        return this.request<UnfinishedBlockHeadersResponse>('get_unfinished_block_headers', {
-            height
+    public async getUnfinishedSubBlockHeaders(subHeight: number): Promise<UnfinishedSubBlockHeadersResponse> {
+        return this.request<UnfinishedSubBlockHeadersResponse>('get_unfinished_sub_block_headers', {
+            sub_height: subHeight
         });
     };
 
@@ -61,8 +64,10 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getHeaviestBlockSeen(): Promise<TipResponse> {
-        return this.request<TipResponse>('get_heaviest_block_seen', {});
+    public async getAdditionsAndRemovals(hash: string): Promise<AdditionsAndRemovalsResponse> {
+        return this.request<AdditionsAndRemovalsResponse>('get_additions_and_removals', {
+            header_hash: hash
+        });
     };
 }
 
