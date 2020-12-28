@@ -23,7 +23,7 @@ class RpcClient {
         return `${this.protocol}://${this.hostname}:${this.port}`;
     }
 
-    protected async request<T>(route: string, body: Record<string, string | number | undefined>): Promise<T> {
+    protected async request<T>(route: string, body: Record<string, string | number | boolean | undefined>): Promise<T> {
         const { data } = await axios.post<T>(`${this.baseUri()}/${route}`, body);
 
         return data;

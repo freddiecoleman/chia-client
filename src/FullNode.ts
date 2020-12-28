@@ -1,5 +1,4 @@
-import { BlockchainStateResponse } from './types/blockchain';
-import { BlocksResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/block';
+import { BlocksResponse, BlockchainStateResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/rpc';
 import { CoinResponse } from './types/coin';
 import { NetspaceResponse } from './types/netspace';
 import { ChiaOptions, RpcClient } from './RpcClient';
@@ -28,10 +27,11 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getBkicjs(start: number, end: number): Promise<BlocksResponse> {
+    public async getBlocks(start: number, end: number): Promise<BlocksResponse> {
         return this.request<BlocksResponse>('get_blocks', {
             start,
-            end
+            end,
+            exclude_header_hash: true
         });
     };
 
