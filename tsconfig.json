@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "declaration": true,
         "lib": [
             "es2018"
         ],
@@ -11,14 +10,13 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "sourceMap": true,
-        "outDir": "dist"
+        "outDir": "./dist"
     },
     "include": [
         "./"
     ],
     "exclude": [
         "./node_modules",
-        "./test",
-        "./dist"
+        "./test"
     ]
 }
