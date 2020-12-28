@@ -1,5 +1,4 @@
-import { BlocksResponse, BlockchainStateResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/rpc';
-import { CoinResponse } from './types/coin';
+import { BlocksResponse, BlockchainStateResponse, CoinResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/rpc';
 import { NetspaceResponse } from './types/netspace';
 import { ChiaOptions, RpcClient } from './RpcClient';
 
