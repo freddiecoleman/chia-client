@@ -5,7 +5,8 @@
         "module": "commonjs",
         "strict": true,
         "sourceMap": true,
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "moduleResolution": "Node"
     },
     "include": [
         "./"
