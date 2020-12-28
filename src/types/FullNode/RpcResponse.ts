@@ -40,3 +40,7 @@ export interface AdditionsAndRemovalsResponse extends RpcResponse {
     additions: Array<CoinRecord>;
     removals: Array<CoinRecord>;
 }
+
+export interface NetspaceResponse extends RpcResponse {
+    space: number;
+}

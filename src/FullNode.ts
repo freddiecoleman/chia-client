@@ -1,5 +1,4 @@
-import { BlocksResponse, BlockchainStateResponse, CoinResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/rpc';
-import { NetspaceResponse } from './types/netspace';
+import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
 import { ChiaOptions, RpcClient } from './RpcClient';
 
 const defaultProtocol = 'http';
