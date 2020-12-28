@@ -25,11 +25,11 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getBlocks(start: number, end: number): Promise<BlocksResponse> {
+    public async getBlocks(start: number, end: number, excludeHeaderHash: boolean = false): Promise<BlocksResponse> {
         return this.request<BlocksResponse>('get_blocks', {
             start,
             end,
-            exclude_header_hash: true
+            exclude_header_hash: excludeHeaderHash
         });
     };
 
