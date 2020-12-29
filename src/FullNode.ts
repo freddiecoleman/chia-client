@@ -1,5 +1,6 @@
 import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
 import { ChiaOptions, RpcClient } from './RpcClient';
+import { Block, WithHeaderHash } from './types/FullNode/Block';
 
 const defaultProtocol = 'http';
 const defaultHostname = 'localhost';
@@ -25,11 +26,11 @@ class FullNode extends RpcClient {
         });
     };
 
-    public async getBlocks(start: number, end: number, excludeHeaderHash: boolean = false): Promise<BlocksResponse> {
-        return this.request<BlocksResponse>('get_blocks', {
+    public async getBlocks<B extends boolean>(start: number, end: number, excludeHeaderHash?: B): Promise<BlocksResponse<Block> | BlocksResponse<Block & WithHeaderHash>> {
+        return this.request('get_blocks', {
             start,
             end,
-            exclude_header_hash: excludeHeaderHash
+            exclude_header_hash: excludeHeaderHash || false
         });
     };
 

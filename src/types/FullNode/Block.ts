@@ -18,3 +18,7 @@ export interface Block {
     transactions_generator: null;
     transactions_info: TransactionsInfo;
 }
+
+export interface WithHeaderHash {
+    header_hash: string;
+}

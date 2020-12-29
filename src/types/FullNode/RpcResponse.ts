@@ -20,8 +20,8 @@ export interface HeaderResponse extends RpcResponse {
     header: BlockHeader;
 }
 
-export interface BlocksResponse extends RpcResponse {
-    blocks: Block[];
+export interface BlocksResponse<T extends Block> extends RpcResponse {
+    blocks: T[];
 }
 
 export interface SubBlockResponse extends RpcResponse {
