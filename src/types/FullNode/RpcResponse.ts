@@ -3,10 +3,7 @@ import { BlockHeader } from './BlockHeader';
 import { CoinRecord } from './CoinRecord';
 import { BlockchainState } from './BlockchainState';
 import { SubBlockRecord } from './SubBlockRecord';
-
-export interface RpcResponse {
-    success: boolean;
-}
+import { RpcResponse } from '../RpcResponse';
 
 export interface BlockchainStateResponse extends RpcResponse {
     blockchain_state: BlockchainState;

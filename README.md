@@ -1,8 +1,8 @@
 # Chia Client
 
-TypeScript client for communicating with a [Chia](https://www.chia.net/) node using the provided RPC interface. All API calls return promises.
+TypeScript client for communicating with [Chia](https://www.chia.net/) RPC interfaces. All API calls return promises.
 
-### Example
+### Full Node
 
 ```
 import { FullNode } from 'chia-client';
@@ -14,6 +14,20 @@ const fullNode = new FullNode({
 });
 
 const blockchain = await fullNode.getBlockchainState();
+```
+
+### Wallet
+
+```
+import { Wallet } from 'chia-client';
+
+const wallet = new Wallet({
+    protocol: 'http',
+    hostname: 'localhost',
+    port: 8555
+});
+
+const mnemonic = await wallet.generateMnemonic();
 ```
 
 ### Credits

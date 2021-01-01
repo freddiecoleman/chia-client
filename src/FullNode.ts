@@ -24,7 +24,7 @@ class FullNode extends RpcClient {
             newer_block_header_hash: newerBlockHeaderHash,
             older_block_header_hash: olderBlockHeaderHash
         });
-    };
+    }
 
     public async getBlocks<B extends boolean>(start: number, end: number, excludeHeaderHash?: B): Promise<BlocksResponse<Block> | BlocksResponse<Block & WithHeaderHash>> {
         return this.request('get_blocks', {
@@ -32,31 +32,31 @@ class FullNode extends RpcClient {
             end,
             exclude_header_hash: excludeHeaderHash || false
         });
-    };
+    }
 
     public async getSubBlock(headerHash: string): Promise<SubBlockResponse> {
         return this.request<SubBlockResponse>('get_sub_block', {
             header_hash: headerHash
         });
-    };
+    }
 
     public async getSubBlockRecordBySubHeight(subHeight: number): Promise<SubBlockRecordResponse> {
         return this.request<SubBlockRecordResponse>('get_sub_block_record_by_sub_height', {
             sub_height: subHeight
         });
-    };
+    }
 
     public async getSubBlockRecord(hash: string): Promise<SubBlockRecordResponse> {
         return this.request<SubBlockRecordResponse>('get_sub_block_record', {
             header_hash: hash
         });
-    };
+    }
 
     public async getUnfinishedSubBlockHeaders(subHeight: number): Promise<UnfinishedSubBlockHeadersResponse> {
         return this.request<UnfinishedSubBlockHeadersResponse>('get_unfinished_sub_block_headers', {
             sub_height: subHeight
         });
-    };
+    }
 
     public async getUnspentCoins(puzzleHash: string, headerHash?: string): Promise<CoinResponse> {
         return this.request<CoinResponse>('get_unspent_coins', {
@@ -69,7 +69,7 @@ class FullNode extends RpcClient {
         return this.request<AdditionsAndRemovalsResponse>('get_additions_and_removals', {
             header_hash: hash
         });
-    };
+    }
 }
 
 export { FullNode };
