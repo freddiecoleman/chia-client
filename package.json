@@ -1,12 +1,12 @@
 {
   "name": "chia-client",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "TypeScript client for Chia node peer RPC interface",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest --runInBand test/",
-    "prepare": "npm run build"
+    "prepare": "rm -rf dist && npm run build"
   },
   "repository": {
     "type": "git",

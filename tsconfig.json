@@ -6,7 +6,8 @@
         "strict": true,
         "sourceMap": true,
         "outDir": "./dist",
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
+        "declaration": true
     },
     "include": [
         "./"
