@@ -6,7 +6,10 @@ jest.mock('fs');
 
 describe('Wallet', () => {
     describe('RPC calls', () => {
-        const wallet = new Wallet({ certPath: '/dev/null/cert.crt' });
+        const wallet = new Wallet({
+            certPath: '/dev/null/cert.crt',
+            keyPath: '/dev/null/cert.key'
+        });
 
         it('calls log_in with type=start', async() => {
             nock('https://localhost:8555')

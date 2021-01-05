@@ -9,6 +9,7 @@ interface ChiaOptions {
     hostname: string;
     port: number;
     certPath: string;
+    keyPath: string;
 }
 
 class RpcClient {
@@ -21,7 +22,10 @@ class RpcClient {
         this.protocol = options.protocol;
         this.hostname = options.hostname;
         this.port = options.port;
-        this.agent = new Agent({ cert: readFileSync(options.certPath) });
+        this.agent = new Agent({
+            cert: readFileSync(options.certPath),
+            key: readFileSync(options.keyPath)
+        });
     }
 
     private baseUri(): string {

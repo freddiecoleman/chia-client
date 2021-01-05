@@ -6,7 +6,10 @@ jest.mock('fs');
 
 describe('Full Node', () => {
     describe('RPC calls', () => {
-        const fullNode = new FullNode({ certPath: '/dev/null/cert.crt' });
+        const fullNode = new FullNode({
+            certPath: '/dev/null/cert.crt',
+            keyPath: '/dev/null/cert.key'
+        });
 
         it('calls get_blockchain_state', async() => {
             nock('https://localhost:8555')
