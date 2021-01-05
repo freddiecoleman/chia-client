@@ -1,17 +1,19 @@
 import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
 import { ChiaOptions, RpcClient } from './RpcClient';
 import { Block, WithHeaderHash } from './types/FullNode/Block';
+import { CertPathRequired } from './types/CertPathRequired';
 
-const defaultProtocol = 'http';
+const defaultProtocol = 'https';
 const defaultHostname = 'localhost';
 const defaultPort = 8555;
 
 class FullNode extends RpcClient {
-    public constructor(options?: Partial<ChiaOptions>) {
+    public constructor(options: Partial<ChiaOptions> & CertPathRequired) {
         super({
             protocol: options?.protocol || defaultProtocol,
             hostname: options?.hostname || defaultHostname,
-            port: options?.port || defaultPort
+            port: options?.port || defaultPort,
+            certPath: options.certPath
         });
     }
 

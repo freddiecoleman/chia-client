@@ -1,12 +1,15 @@
+import * as fs from 'fs';
 import * as nock from 'nock';
 import { Wallet } from '../index';
 
+jest.mock('fs');
+
 describe('Wallet', () => {
     describe('RPC calls', () => {
-        const wallet = new Wallet();
+        const wallet = new Wallet({ certPath: '/dev/null/cert.crt' });
 
         it('calls log_in with type=start', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/log_in', {
                     host: 'https://backup.chia.net',
@@ -19,7 +22,7 @@ describe('Wallet', () => {
         });
 
         it('calls log_in with type=restore_backup', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/log_in', {
                     host: 'https://backup.chia.net',
@@ -33,7 +36,7 @@ describe('Wallet', () => {
         });
 
         it('calls log_in with type=skip', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/log_in', {
                     host: 'https://backup.chia.net',
@@ -46,7 +49,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_public_keys', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_public_keys')
                 .reply(200, { public_key_fingerprints: 'success' });
@@ -55,7 +58,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_private_key', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_private_key', { fingerprint: 123 })
                 .reply(200, { private_key: 'success' });
@@ -64,7 +67,7 @@ describe('Wallet', () => {
         });
 
         it('calls generate_mnemonic', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/generate_mnemonic')
                 .reply(200, { mnemonic: 'success' });
@@ -73,7 +76,7 @@ describe('Wallet', () => {
         });
 
         it('calls add_key', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/add_key', {
                     mnemonic: ['bitcoin', 'chia'],
@@ -85,7 +88,7 @@ describe('Wallet', () => {
         });
 
         it('calls delete_key', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/delete_key', { fingerprint: 123 })
                 .reply(200, 'success');
@@ -94,7 +97,7 @@ describe('Wallet', () => {
         });
 
         it('calls delete_all_keys', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/delete_all_keys')
                 .reply(200, 'success');
@@ -103,7 +106,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_sync_status', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_sync_status')
                 .reply(200, { syncing: 'success' });
@@ -112,7 +115,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_height_info', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_height_info')
                 .reply(200, { height: 'success' });
@@ -121,7 +124,7 @@ describe('Wallet', () => {
         });
 
         it('calls farm_block', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/farm_block', { address: 'fakeAddress' })
                 .reply(200, 'success');
@@ -130,7 +133,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_wallets', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_wallets')
                 .reply(200, { wallets: 'success' });
@@ -139,7 +142,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_wallet_balance', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_wallet_balance', { wallet_id: 'fakeWalletId' })
                 .reply(200, { wallet_balance: 'success' });
@@ -148,7 +151,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_transaction', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_transaction', {
                     wallet_id: 'fakeWalletId',
@@ -160,7 +163,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_transactions', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_transactions', { wallet_id: 'fakeWalletId' })
                 .reply(200, { transactions: 'success' });
@@ -169,7 +172,7 @@ describe('Wallet', () => {
         });
 
         it('calls get_next_address', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/get_next_address', { wallet_id: 'fakeWalletId' })
                 .reply(200, { address: 'success' });
@@ -178,7 +181,7 @@ describe('Wallet', () => {
         });
 
         it('calls send_transaction', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/send_transaction', {
                     wallet_id: 'fakeWalletId',
@@ -192,7 +195,7 @@ describe('Wallet', () => {
         });
 
         it('calls create_backup', async() => {
-            nock('http://localhost:8555')
+            nock('https://localhost:8555')
                 .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
                 .post('/create_backup', { file_path: '/root/yolo' })
                 .reply(200, 'success');

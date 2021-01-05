@@ -1,4 +1,5 @@
 import { ChiaOptions, RpcClient } from './RpcClient';
+import { CertPathRequired } from './types/CertPathRequired';
 import {
     AddKeyResponse,
     GenerateMnemonicResponse,
@@ -17,17 +18,18 @@ import { Transaction } from './types/Wallet/Transaction';
 import { WalletBalance } from './types/Wallet/WalletBalance';
 import { WalletInfo } from './types/Wallet/WalletInfo';
 
-const defaultProtocol = 'http';
+const defaultProtocol = 'https';
 const defaultHostname = 'localhost';
 const defaultPort = 8555;
 const host = 'https://backup.chia.net';
 
 class Wallet extends RpcClient {
-    public constructor(options?: Partial<ChiaOptions>) {
+    public constructor(options: Partial<ChiaOptions> & CertPathRequired) {
         super({
             protocol: options?.protocol || defaultProtocol,
             hostname: options?.hostname || defaultHostname,
-            port: options?.port || defaultPort
+            port: options?.port || defaultPort,
+            certPath: options.certPath
         });
     }
 
