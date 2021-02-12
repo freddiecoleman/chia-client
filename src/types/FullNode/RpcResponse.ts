@@ -9,7 +9,7 @@ export interface BlockchainStateResponse extends RpcResponse {
     blockchain_state: BlockchainState;
 }
 
-export interface UnfinishedSubBlockHeadersResponse extends RpcResponse {
+export interface UnfinishedBlockHeadersResponse extends RpcResponse {
     headers: BlockHeader[];
 }
 
@@ -25,7 +25,7 @@ export interface BlockResponse extends RpcResponse {
     block: Block;
 }
 
-export interface SubBlockRecordResponse extends RpcResponse {
+export interface BlockRecordResponse extends RpcResponse {
     sub_block_record: SubBlockRecord;
 }
 

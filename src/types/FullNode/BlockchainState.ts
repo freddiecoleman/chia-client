@@ -1,8 +1,9 @@
 import { Block } from './Block';
+import { SubBlockRecord } from './SubBlockRecord';
 
 export interface BlockchainState {
     difficulty: number;
-    peak: Block;
+    peak: SubBlockRecord;
     space: number;
     mempool_size: number;
     sub_slot_iters: number;

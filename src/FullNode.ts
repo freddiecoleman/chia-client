@@ -1,4 +1,4 @@
-import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, BlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
+import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, BlockResponse, BlockRecordResponse, UnfinishedBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
 import { ChiaOptions, RpcClient } from './RpcClient';
 import { Block, WithHeaderHash } from './types/FullNode/Block';
 import { CertPathRequired } from './types/CertPathRequired';
@@ -43,21 +43,21 @@ class FullNode extends RpcClient {
         });
     }
 
-    public async getSubBlockRecordBySubHeight(subHeight: number): Promise<SubBlockRecordResponse> {
-        return this.request<SubBlockRecordResponse>('get_sub_block_record_by_sub_height', {
-            sub_height: subHeight
+    public async getSubBlockRecordBySubHeight(height: number): Promise<BlockRecordResponse> {
+        return this.request<BlockRecordResponse>('get_block_record_by_height', {
+            height
         });
     }
 
-    public async getSubBlockRecord(hash: string): Promise<SubBlockRecordResponse> {
-        return this.request<SubBlockRecordResponse>('get_sub_block_record', {
+    public async getSubBlockRecord(hash: string): Promise<BlockRecordResponse> {
+        return this.request<BlockRecordResponse>('get_block_record', {
             header_hash: hash
         });
     }
 
-    public async getUnfinishedSubBlockHeaders(subHeight: number): Promise<UnfinishedSubBlockHeadersResponse> {
-        return this.request<UnfinishedSubBlockHeadersResponse>('get_unfinished_sub_block_headers', {
-            sub_height: subHeight
+    public async getUnfinishedSubBlockHeaders(height: number): Promise<UnfinishedBlockHeadersResponse> {
+        return this.request<UnfinishedBlockHeadersResponse>('get_unfinished_block_headers', {
+            height
         });
     }
 
