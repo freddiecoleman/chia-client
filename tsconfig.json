@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
-        "lib": ["es2018"],
+        "lib": [
+            "es2018"
+        ],
         "target": "ES2018",
         "module": "commonjs",
         "strict": true,
@@ -14,6 +16,7 @@
     ],
     "exclude": [
         "./node_modules",
-        "./test"
+        "./test",
+        "./dist"
     ]
 }
