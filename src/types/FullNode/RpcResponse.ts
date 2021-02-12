@@ -21,8 +21,8 @@ export interface BlocksResponse<T extends Block> extends RpcResponse {
     blocks: T[];
 }
 
-export interface SubBlockResponse extends RpcResponse {
-    sub_block: Block;
+export interface BlockResponse extends RpcResponse {
+    block: Block;
 }
 
 export interface SubBlockRecordResponse extends RpcResponse {

@@ -1,4 +1,4 @@
-import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, SubBlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
+import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, BlockResponse, SubBlockRecordResponse, UnfinishedSubBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
 import { ChiaOptions, RpcClient } from './RpcClient';
 import { Block, WithHeaderHash } from './types/FullNode/Block';
 import { CertPathRequired } from './types/CertPathRequired';
@@ -37,8 +37,8 @@ class FullNode extends RpcClient {
         });
     }
 
-    public async getSubBlock(headerHash: string): Promise<SubBlockResponse> {
-        return this.request<SubBlockResponse>('get_sub_block', {
+    public async getBlock(headerHash: string): Promise<BlockResponse> {
+        return this.request<BlockResponse>('get_block', {
             header_hash: headerHash
         });
     }
