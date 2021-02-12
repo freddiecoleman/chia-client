@@ -23,7 +23,6 @@ export interface BlockRecord {
     reward_claims_incorporated: RewardClaim[] | null;
     reward_infusion_new_challenge: string;
     signage_point_index: number;
-    sub_block_height: number;
     sub_epoch_summary_included: null;
     sub_slot_iters: string;
     // Only transaction blocks have timestamp

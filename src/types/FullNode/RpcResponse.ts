@@ -26,7 +26,7 @@ export interface BlockResponse extends RpcResponse {
 }
 
 export interface BlockRecordResponse extends RpcResponse {
-    sub_block_record: BlockRecord;
+    block_record: BlockRecord;
 }
 
 export interface CoinResponse extends RpcResponse {
