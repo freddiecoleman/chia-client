@@ -1,7 +1,7 @@
 import { FoliageBlock } from './FoliageBlock';
 import { FoliageSubBlock } from './FoliageSubBlock';
 import { Proof } from './Proof';
-import { SubBlock } from './SubBlock';
+import { RewardChainSubBlock } from './RewardChainSubBlock';
 import { SubSlot } from './SubSlot';
 import { TransactionsInfo } from './TransactionsInfo';
 
@@ -14,11 +14,10 @@ export interface Block {
     infused_challenge_chain_ip_proof: Proof;
     reward_chain_ip_proof: Proof;
     reward_chain_sp_proof: Proof;
-    reward_chain_sub_block: SubBlock;
+    reward_chain_sub_block: RewardChainSubBlock;
     transactions_generator: null;
-    transactions_info: TransactionsInfo;
-}
-
-export interface WithHeaderHash {
-    header_hash: string;
+    // Only present on transaction block
+    transactions_info: TransactionsInfo | null;
+    // Only present if requested by client
+    header_hash?: string;
 }

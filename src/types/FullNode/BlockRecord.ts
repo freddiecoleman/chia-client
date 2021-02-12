@@ -1,6 +1,7 @@
+import { RewardClaim } from "./RewardClaim";
 import { VdfOutput } from "./Vdf";
 
-export interface SubBlockRecord {
+export interface BlockRecord {
     challenge_block_info_hash: string;
     challenge_vdf_output: VdfOutput;
     deficit: number;
@@ -16,12 +17,16 @@ export interface SubBlockRecord {
     pool_puzzle_hash: string;
     prev_block_hash: string | null;
     prev_hash: string;
+    prev_transaction_block_height: number;
     required_iters: string;
+    // Only transaction blocks have reward claims
+    reward_claims_incorporated: RewardClaim[] | null;
     reward_infusion_new_challenge: string;
     signage_point_index: number;
     sub_block_height: number;
     sub_epoch_summary_included: null;
     sub_slot_iters: string;
+    // Only transaction blocks have timestamp
     timestamp: string | null;
     total_iters: string;
     weight: string;

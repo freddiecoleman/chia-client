@@ -1,6 +1,5 @@
 export interface VdfOutput {
-    a: string;
-    b: string;
+    data: string;
 }
 
 export interface Vdf {

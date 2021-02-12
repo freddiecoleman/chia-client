@@ -1,6 +1,6 @@
 import { BlocksResponse, BlockchainStateResponse, CoinResponse, NetspaceResponse, BlockResponse, BlockRecordResponse, UnfinishedBlockHeadersResponse, AdditionsAndRemovalsResponse } from './types/FullNode/RpcResponse';
 import { ChiaOptions, RpcClient } from './RpcClient';
-import { Block, WithHeaderHash } from './types/FullNode/Block';
+import { Block } from './types/FullNode/Block';
 import { CertPathRequired } from './types/CertPathRequired';
 
 const defaultProtocol = 'https';
@@ -29,7 +29,7 @@ class FullNode extends RpcClient {
         });
     }
 
-    public async getBlocks<B extends boolean>(start: number, end: number, excludeHeaderHash?: B): Promise<BlocksResponse<Block> | BlocksResponse<Block & WithHeaderHash>> {
+    public async getBlocks<B extends boolean>(start: number, end: number, excludeHeaderHash?: B): Promise<BlocksResponse<Block>> {
         return this.request('get_blocks', {
             start,
             end,
@@ -43,19 +43,19 @@ class FullNode extends RpcClient {
         });
     }
 
-    public async getSubBlockRecordBySubHeight(height: number): Promise<BlockRecordResponse> {
+    public async getBlockRecordByHeight(height: number): Promise<BlockRecordResponse> {
         return this.request<BlockRecordResponse>('get_block_record_by_height', {
             height
         });
     }
 
-    public async getSubBlockRecord(hash: string): Promise<BlockRecordResponse> {
+    public async getBlockRecord(hash: string): Promise<BlockRecordResponse> {
         return this.request<BlockRecordResponse>('get_block_record', {
             header_hash: hash
         });
     }
 
-    public async getUnfinishedSubBlockHeaders(height: number): Promise<UnfinishedBlockHeadersResponse> {
+    public async getUnfinishedBlockHeaders(height: number): Promise<UnfinishedBlockHeadersResponse> {
         return this.request<UnfinishedBlockHeadersResponse>('get_unfinished_block_headers', {
             height
         });

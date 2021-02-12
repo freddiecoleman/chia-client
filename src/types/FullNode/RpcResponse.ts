@@ -2,7 +2,7 @@ import { Block } from './Block';
 import { BlockHeader } from './BlockHeader';
 import { CoinRecord } from './CoinRecord';
 import { BlockchainState } from './BlockchainState';
-import { SubBlockRecord } from './SubBlockRecord';
+import { BlockRecord } from './BlockRecord';
 import { RpcResponse } from '../RpcResponse';
 
 export interface BlockchainStateResponse extends RpcResponse {
@@ -26,7 +26,7 @@ export interface BlockResponse extends RpcResponse {
 }
 
 export interface BlockRecordResponse extends RpcResponse {
-    sub_block_record: SubBlockRecord;
+    sub_block_record: BlockRecord;
 }
 
 export interface CoinResponse extends RpcResponse {

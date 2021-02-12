@@ -1,6 +1,8 @@
 export interface FoliageSubBlock {
-    foliage_block_hash: string;
-    foliage_block_signature: string;
+    // Only present on transaction blocks
+    foliage_block_hash: string | null;
+    // Only present on transaction blocks
+    foliage_block_signature: string | null;
     foliage_sub_block_data: {
         extension_data: string;
         farmer_reward_puzzle_hash: string;
