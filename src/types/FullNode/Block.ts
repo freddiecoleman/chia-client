@@ -9,7 +9,8 @@ export interface Block {
     challenge_chain_ip_proof: Proof;
     challenge_chain_sp_proof: Proof;
     finished_sub_slots: SubSlot[];
-    foliage_block: FoliageBlock;
+    // Only present on transaction block
+    foliage_block?: FoliageBlock;
     foliage_sub_block: FoliageSubBlock;
     infused_challenge_chain_ip_proof: Proof;
     reward_chain_ip_proof: Proof;
