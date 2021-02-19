@@ -1,13 +1,13 @@
 import { ProofOfSpace } from './ProofOfSpace';
 import { Vdf } from './Vdf';
 
-export interface RewardChainSubBlock {
+export interface RewardChainBlock {
     challenge_chain_ip_vdf: Vdf;
     challenge_chain_sp_signature: string;
     challenge_chain_sp_vdf: Vdf;
     height: number;
     infused_challenge_chain_ip_vdf: Vdf;
-    is_block: boolean;
+    is_transaction_block: boolean;
     pos_ss_cc_challenge_hash: string;
     proof_of_space: ProofOfSpace;
     reward_chain_ip_vdf: Vdf;

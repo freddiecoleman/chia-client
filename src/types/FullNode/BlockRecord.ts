@@ -15,9 +15,9 @@ export interface BlockRecord {
     infused_challenge_vdf_output: VdfOutput;
     overflow: boolean;
     pool_puzzle_hash: string;
-    prev_block_hash: string | null;
-    prev_hash: string;
+    prev_transaction_block_hash: string | null;
     prev_transaction_block_height: number;
+    prev_hash: string;
     required_iters: string;
     // Only transaction blocks have reward claims
     reward_claims_incorporated: RewardClaim[] | null;
