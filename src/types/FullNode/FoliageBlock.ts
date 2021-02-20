@@ -1,8 +1,4 @@
 export interface FoliageBlock {
-    // Only present on transaction blocks
-    foliage_block_hash: string | null;
-    // Only present on transaction blocks
-    foliage_block_signature: string | null;
     foliage_block_data: {
         extension_data: string;
         farmer_reward_puzzle_hash: string;
@@ -13,7 +9,9 @@ export interface FoliageBlock {
         };
         unfinished_reward_block_hash: string;
     };
-    foliage_sub_block_signature: string;
-    prev_sub_block_hash: string;
+    foliage_block_data_signature: string | null;
+    foliage_transaction_block_hash: string | null;
+    foliage_transaction_block_signature: string;
+    prev_block_hash: string;
     reward_block_hash: string;
 }
