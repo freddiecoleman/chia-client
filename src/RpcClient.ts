@@ -27,6 +27,7 @@ class RpcClient {
       ca: readFileSync(options.caCertPath),
       cert: readFileSync(options.certPath),
       key: readFileSync(options.keyPath),
+      rejectUnauthorized: options.hostname !== "localhost",
     });
   }
 
@@ -38,9 +39,6 @@ class RpcClient {
     route: string,
     body: Record<string, string | number | boolean | string[] | undefined>
   ): Promise<T> {
-    // Should not be doing this: Temporary hack to get chiaexplorer up and running quickly
-    // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
     const { data } = await axios.post<T>(`${this.baseUri()}/${route}`, body, {
       httpsAgent: this.agent,
     });
