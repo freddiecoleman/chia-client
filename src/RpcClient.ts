@@ -8,7 +8,7 @@ interface ChiaOptions {
   protocol: Protocol;
   hostname: string;
   port: number;
-  caCertPath: string;
+  caCertPath: string | boolean;
   certPath: string;
   keyPath: string;
 }
@@ -24,7 +24,7 @@ class RpcClient {
     this.hostname = options.hostname;
     this.port = options.port;
     this.agent = new Agent({
-      ca: readFileSync(options.caCertPath),
+      ...(typeof options.caCertPath !== 'boolean' ? { ca: readFileSync(options.caCertPath) } : {}),
       cert: readFileSync(options.certPath),
       key: readFileSync(options.keyPath),
       rejectUnauthorized: options.hostname !== "localhost",
