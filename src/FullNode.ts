@@ -22,14 +22,14 @@ const defaultCertPath = chiaConfig?.daemon_ssl.private_crt;
 const defaultCertKey = chiaConfig?.daemon_ssl.private_key;
 
 class FullNode extends RpcClient {
-  public constructor(options: Partial<ChiaOptions> & CertPath) {
+  public constructor(options?: Partial<ChiaOptions> & CertPath) {
     super({
       protocol: options?.protocol || defaultProtocol,
       hostname: options?.hostname || defaultHostname,
       port: options?.port || defaultPort,
-      caCertPath: options.caCertPath || getChiaFilePath(defaultCaCertPath),
-      certPath: options.certPath || getChiaFilePath(defaultCertPath),
-      keyPath: options.keyPath || getChiaFilePath(defaultCertKey),
+      caCertPath: options?.caCertPath || getChiaFilePath(defaultCaCertPath),
+      certPath: options?.certPath || getChiaFilePath(defaultCertPath),
+      keyPath: options?.keyPath || getChiaFilePath(defaultCertKey),
     });
   }
 
