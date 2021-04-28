@@ -73,6 +73,19 @@ describe("Full Node", () => {
       );
     });
 
+    it("calls get_coin_record_by_name with name", async () => {
+      nock("https://localhost:8555")
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .post("/get_coin_record_by_name", {
+          name: "fakeCoinName",
+        })
+        .reply(200, "success");
+
+      expect(await fullNode.getCoinRecordByName("fakeCoinName")).toEqual(
+        "success"
+      );
+    });
+
     it("calls get_additions_and_removals", async () => {
       nock("https://localhost:8555")
         .defaultReplyHeaders({ "access-control-allow-origin": "*" })
