@@ -2,6 +2,7 @@ import {
   BlocksResponse,
   BlockchainStateResponse,
   CoinResponse,
+  CoinRecordResponse,
   NetspaceResponse,
   BlockResponse,
   BlockRecordResponse,
@@ -100,6 +101,12 @@ class FullNode extends RpcClient {
       start_height: startHeight,
       end_height: endHeight,
       include_spent_coins: false,
+    });
+  }
+
+  public async getCoinRecordByName(name: string): Promise<CoinRecordResponse> {
+    return this.request<CoinRecordResponse>("get_coin_record_by_name", {
+      name,
     });
   }
 
