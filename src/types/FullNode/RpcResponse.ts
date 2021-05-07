@@ -33,6 +33,9 @@ export interface CoinResponse extends RpcResponse {
     coin_records: Array<CoinRecord>;
 }
 
+export interface CoinRecordResponse extends RpcResponse {
+    coin_record: CoinRecord;
+}
 export interface AdditionsAndRemovalsResponse extends RpcResponse {
     additions: Array<CoinRecord>;
     removals: Array<CoinRecord>;
