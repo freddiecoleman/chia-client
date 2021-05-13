@@ -208,7 +208,7 @@ class Wallet extends RpcClient {
     return this.request<{}>("create_backup", { file_path: filePath });
   }
   
-  /*  */
+  /* https://github.com/CMEONE/chia-utils */
   public addressToPuzzleHash(address: string): string {
     return address_to_puzzle_hash(address);
   }
