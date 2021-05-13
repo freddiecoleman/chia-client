@@ -166,10 +166,10 @@ class Wallet extends RpcClient {
     return transaction;
   }
 
-  public async getTransactions(walletId: string): Promise<Transaction[]> {
+  public async getTransactions(walletId: string, limit: number): Promise<Transaction[]> {
     const { transactions } = await this.request<TransactionsResponse>(
       "get_transactions",
-      { wallet_id: walletId }
+      { wallet_id: walletId, end: limit }
     );
 
     return transactions;
@@ -178,7 +178,7 @@ class Wallet extends RpcClient {
   public async getNextAddress(walletId: string): Promise<string> {
     const { address } = await this.request<NextAddressResponse>(
       "get_next_address",
-      { wallet_id: walletId ,new_address: true}
+      { wallet_id: walletId, new_address: true}
     );
 
     return address;
