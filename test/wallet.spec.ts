@@ -179,6 +179,15 @@ describe("Wallet", () => {
       expect(await wallet.getTransactions("fakeWalletId")).toEqual("success");
     });
 
+    it("calls get_transactions with limit=1000", async () => {
+      nock("https://localhost:8555")
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .post("/get_transactions", { wallet_id: "fakeWalletId", end: 1000 })
+        .reply(200, { transactions: "success" });
+
+      expect(await wallet.getTransactions("fakeWalletId", 1000)).toEqual("success");
+    });
+
     it("calls get_next_address", async () => {
       nock("https://localhost:8555")
         .defaultReplyHeaders({ "access-control-allow-origin": "*" })
