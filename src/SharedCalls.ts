@@ -50,4 +50,4 @@ class SharedCalls extends RpcClient {
     }
 }
 
-
+export { SharedCalls }
