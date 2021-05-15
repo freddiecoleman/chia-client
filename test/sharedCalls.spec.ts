@@ -6,7 +6,7 @@ import {SharedCalls} from "../index";
 describe("Shared Calls", () => {
     describe("RPC Calls", () => {
         const sharedCallInterface = new SharedCalls({
-            caCertPath: "/dev/null/crt",
+            caCertPath: "/dev/null/cert.crt",
             certPath: "/dev/null/cert.crt",
             keyPath: "/dev/null/cert.key",
         })
