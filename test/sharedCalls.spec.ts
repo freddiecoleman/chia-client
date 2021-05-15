@@ -1,6 +1,8 @@
 import * as nock from "nock";
 import {SharedCalls} from "../index";
 
+jest.mock("fs");
+jest.mock("yaml");
 
 
 describe("Shared Calls", () => {
