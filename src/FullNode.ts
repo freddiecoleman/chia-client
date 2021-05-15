@@ -13,6 +13,7 @@ import { ChiaOptions, RpcClient } from "./RpcClient";
 import { Block } from "./types/FullNode/Block";
 import { CertPath } from "./types/CertPath";
 import { getChiaConfig, getChiaFilePath } from "./ChiaNodeUtils";
+import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info } from "chia-utils";
 
 const chiaConfig = getChiaConfig();
 const defaultProtocol = "https";
@@ -119,6 +120,19 @@ class FullNode extends RpcClient {
         header_hash: hash,
       }
     );
+  }
+  
+  /* https://github.com/CMEONE/chia-utils */
+  public addressToPuzzleHash(address: string): string {
+    return address_to_puzzle_hash(address);
+  }
+  
+  public puzzleHashToAddress(puzzleHash: string): string {
+    return puzzle_hash_to_address(puzzleHash);
+  }
+  
+  public getCoinInfo(parentCoinInfo: string, puzzleHash: string, amount: number): string {
+    return get_coin_info(parentCoinInfo, puzzleHash, amount / 1000000000000);
   }
 }
 
