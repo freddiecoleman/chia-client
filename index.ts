@@ -5,5 +5,5 @@ import { SharedCalls } from './src/SharedCalls'
 export {
     FullNode,
     Wallet,
-    SharedCalls
+    SharedCalls,
 };
