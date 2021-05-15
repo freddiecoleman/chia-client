@@ -4,6 +4,7 @@ import { CoinRecord } from './CoinRecord';
 import { BlockchainState } from './BlockchainState';
 import { BlockRecord } from './BlockRecord';
 import { RpcResponse } from '../RpcResponse';
+import {Connection} from "../Shared/Connection";
 
 export interface BlockchainStateResponse extends RpcResponse {
     blockchain_state: BlockchainState;
@@ -43,4 +44,8 @@ export interface AdditionsAndRemovalsResponse extends RpcResponse {
 
 export interface NetspaceResponse extends RpcResponse {
     space: number;
+}
+
+export interface ConnectionResponse extends RpcResponse{
+    connections: Array<Connection>;
 }
