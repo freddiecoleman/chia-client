@@ -18,7 +18,8 @@ const fullNode = new FullNode({
     port: 8555
 });
 
-const blockchain = await fullNode.getBlockchainState();
+const blockchain = fullNode.getBlockchainState();
+
 console.log(await blockChainState.blockchain_state.space);
 ```
 
