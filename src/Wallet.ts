@@ -264,7 +264,7 @@ class Wallet extends RpcClient {
   }
   
   public getCoinInfo(parentCoinInfo: string, puzzleHash: string, amount: number): string {
-    return get_coin_info(parentCoinInfo, puzzleHash, amount / 1000000000000);
+    return get_coin_info_mojo(parentCoinInfo, puzzleHash, amount);
   }
 }
 
