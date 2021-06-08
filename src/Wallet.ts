@@ -231,6 +231,24 @@ class Wallet extends RpcClient {
     );
     return { transaction, transactionId: transaction_id };
   }
+  
+  public async sendTransactionRaw(
+    walletId: string,
+    amount: number,
+    address: string,
+    fee: number
+  ): Promise<{}> {
+    const transaction = await this.request<TransactionResponse>(
+      "send_transaction",
+      {
+        wallet_id: walletId,
+        amount,
+        address,
+        fee,
+      }
+    );
+    return transaction;
+  }
 
   public async createBackup(filePath: string): Promise<{}> {
     return this.request<{}>("create_backup", { file_path: filePath });
