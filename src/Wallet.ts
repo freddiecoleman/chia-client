@@ -19,7 +19,7 @@ import { Transaction } from "./types/Wallet/Transaction";
 import { WalletBalance } from "./types/Wallet/WalletBalance";
 import { WalletInfo } from "./types/Wallet/WalletInfo";
 // @ts-ignore
-import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info } from "chia-utils";
+import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info_mojo } from "chia-utils";
 
 const chiaConfig = getChiaConfig();
 const defaultProtocol = "https";
