@@ -177,6 +177,15 @@ class Wallet extends RpcClient {
     return transactions;
   }
 
+  public async getAddress(walletId: string): Promise<string> {
+    const { address } = await this.request<NextAddressResponse>(
+      "get_next_address",
+      { wallet_id: walletId, new_address: false }
+    );
+
+    return address;
+  }
+
   public async getNextAddress(walletId: string): Promise<string> {
     const { address } = await this.request<NextAddressResponse>(
       "get_next_address",
