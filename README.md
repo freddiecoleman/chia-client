@@ -2,18 +2,25 @@
 
 TypeScript client for communicating with [Chia](https://www.chia.net/) RPC interfaces. All API calls return promises.
 
+### Install and Setup
+```
+npm install chia-client
+```
+
 ### Full Node
 
 ```
 import { FullNode } from 'chia-client';
 
 const fullNode = new FullNode({
-    protocol: 'http',
+    protocol: 'https',
     hostname: 'localhost',
     port: 8555
 });
 
-const blockchain = await fullNode.getBlockchainState();
+const blockchain = fullNode.getBlockchainState();
+
+console.log(await blockChainState.blockchain_state.space);
 ```
 
 ### Wallet
@@ -22,7 +29,7 @@ const blockchain = await fullNode.getBlockchainState();
 import { Wallet } from 'chia-client';
 
 const wallet = new Wallet({
-    protocol: 'http',
+    protocol: 'https',
     hostname: 'localhost',
     port: 8555
 });
