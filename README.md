@@ -4,7 +4,7 @@ TypeScript client for communicating with [Chia](https://www.chia.net/) RPC inter
 
 ### Install and Setup
 ```
-npm install git+https://github.com/freddiecoleman/chia-client.git
+npm install chia-client
 ```
 
 ### Full Node
