@@ -19,7 +19,7 @@ import { Transaction } from "./types/Wallet/Transaction";
 import { WalletBalance } from "./types/Wallet/WalletBalance";
 import { WalletInfo } from "./types/Wallet/WalletInfo";
 // @ts-ignore
-import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info } from "chia-utils";
+import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info_mojo } from "chia-utils";
 
 const chiaConfig = getChiaConfig();
 const defaultProtocol = "https";
@@ -177,6 +177,15 @@ class Wallet extends RpcClient {
     return transactions;
   }
 
+  public async getAddress(walletId: string): Promise<string> {
+    const { address } = await this.request<NextAddressResponse>(
+      "get_next_address",
+      { wallet_id: walletId, new_address: false }
+    );
+
+    return address;
+  }
+
   public async getNextAddress(walletId: string): Promise<string> {
     const { address } = await this.request<NextAddressResponse>(
       "get_next_address",
@@ -204,6 +213,42 @@ class Wallet extends RpcClient {
 
     return transaction;
   }
+  
+  public async sendTransactionAndGetId(
+    walletId: string,
+    amount: number,
+    address: string,
+    fee: number
+  ): Promise<{}> {
+    const { transaction, transaction_id } = await this.request<TransactionResponse>(
+      "send_transaction",
+      {
+        wallet_id: walletId,
+        amount,
+        address,
+        fee,
+      }
+    );
+    return { transaction, transactionId: transaction_id };
+  }
+  
+  public async sendTransactionRaw(
+    walletId: string,
+    amount: number,
+    address: string,
+    fee: number
+  ): Promise<{}> {
+    const transaction = await this.request<TransactionResponse>(
+      "send_transaction",
+      {
+        wallet_id: walletId,
+        amount,
+        address,
+        fee,
+      }
+    );
+    return transaction;
+  }
 
   public async createBackup(filePath: string): Promise<{}> {
     return this.request<{}>("create_backup", { file_path: filePath });
@@ -219,7 +264,7 @@ class Wallet extends RpcClient {
   }
   
   public getCoinInfo(parentCoinInfo: string, puzzleHash: string, amount: number): string {
-    return get_coin_info(parentCoinInfo, puzzleHash, amount / 1000000000000);
+    return get_coin_info_mojo(parentCoinInfo, puzzleHash, amount);
   }
 }
 
