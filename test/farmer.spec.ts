@@ -50,5 +50,42 @@ describe("Farmer", () => {
 
       expect(await farmer.setRewardTarget("fakeFarmerTarget", "fakePoolTarget")).toEqual("success");
     });
+
+    it("calls get_pool_state", async () => {
+      nock("https://localhost:8559")
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .post("/get_pool_state", {})
+        .reply(200, "success");
+
+      expect(await farmer.getPoolState()).toEqual("success");
+    });
+
+    it("calls set_payout_instructions", async () => {
+      nock("https://localhost:8559")
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .post("/set_payout_instructions", {
+          launcher_id: 'fakeLauncher',
+          payout_instructions: 'fakePayoutInstructions'
+        })
+        .reply(200, "success");
+
+      expect(await farmer.setPayoutInstructions(
+        'fakeLauncher',
+        'fakePayoutInstructions'
+      )).toEqual("success");
+    });
+
+    it("calls get_pool_login_link", async () => {
+      nock("https://localhost:8559")
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .post("/get_pool_login_link", {
+          launcher_id: 'fakeLauncher',
+        })
+        .reply(200, "success");
+
+      expect(await farmer.getPoolLoginLink(
+        'fakeLauncher'
+      )).toEqual("success");
+    });
   });
 });
