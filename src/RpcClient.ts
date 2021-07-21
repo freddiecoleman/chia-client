@@ -37,7 +37,7 @@ class RpcClient {
 
   protected async request<T>(
     route: string,
-    body: Record<string, string | number | boolean | string[] | undefined>
+    body: Record<string, string | number | boolean | string[] | undefined | any>
   ): Promise<T> {
     const { data } = await axios.post<T>(`${this.baseUri()}/${route}`, body, {
       httpsAgent: this.agent,
