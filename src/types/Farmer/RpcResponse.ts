@@ -1,6 +1,7 @@
 import { ProofOfSpace } from '../FullNode/ProofOfSpace';
 import { RpcResponse } from '../RpcResponse';
 import { SignagePoint } from './SignagePoint';
+import { PoolState } from './PoolState';
 
 export interface SignagePointResponse extends RpcResponse {
     signage_point: SignagePoint;
@@ -21,3 +22,11 @@ export interface RewardTargetResponse extends RpcResponse {
     have_pool_sk?: boolean
 }
 
+export interface PoolStateResponse extends RpcResponse {
+    pool_state: PoolState[];
+}
+
+
+export interface LoginLinkResponse extends RpcResponse {
+    login_link: string;
+}
