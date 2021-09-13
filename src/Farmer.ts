@@ -1,4 +1,6 @@
 import { 
+  LoginLinkResponse,
+  PoolStateResponse,
   RewardTargetResponse,
   SignagePointResponse,
   SignagePointsResponse
@@ -55,6 +57,28 @@ class Farmer extends RpcClient {
     return this.request<RpcResponse>("set_reward_targets", {
       farmer_target: farmerTarget,
       pool_target: poolTarget
+    });
+  }
+
+  public async getPoolState(): Promise<PoolStateResponse> {
+    return this.request<PoolStateResponse>("get_pool_state", {});
+  }
+
+  public async setPayoutInstructions(
+    launcher_id: string,
+    payout_instructions: string
+  ): Promise<RpcResponse> {
+    return this.request<RpcResponse>("set_payout_instructions", {
+      launcher_id: launcher_id,
+      payout_instructions: payout_instructions
+    });
+  }
+
+  public async getPoolLoginLink(
+    launcher_id: string
+  ): Promise<LoginLinkResponse> {
+    return this.request<LoginLinkResponse>("get_pool_login_link", {
+      launcher_id: launcher_id
     });
   }
 }
