@@ -250,6 +250,29 @@ class Wallet extends RpcClient {
     return transaction;
   }
 
+  public async sendTransactionMulti(
+    walletId: string,
+    additions: { address: string, amount: number }[],
+    fee: number
+  ): Promise<Transaction> {
+
+    const additionWithPuzzleHash = additions.map(addition => ({
+      puzzle_hash: address_to_puzzle_hash(addition.address),
+      amount: addition.amount
+    }))
+
+    const { transaction } = await this.request(
+      "send_transaction_multi",
+      {
+        wallet_id: walletId,
+        additions: additionWithPuzzleHash,
+        fee,
+      }
+    );
+
+    return transaction;
+  }
+
   public async createBackup(filePath: string): Promise<{}> {
     return this.request<{}>("create_backup", { file_path: filePath });
   }
