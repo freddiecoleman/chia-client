@@ -16,7 +16,6 @@ class Harvester extends RpcClient {
       protocol: options?.protocol || defaultProtocol,
       hostname: options?.hostname || defaultHostname,
       port: options?.port || defaultPort,
-      ...(typeof options?.caCertPath !== 'boolean' ? { caCertPath: options?.caCertPath } : {}),
       certPath: options?.certPath as string,
       keyPath: options?.keyPath as string,
     });

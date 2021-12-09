@@ -1,4 +1,3 @@
-import { getChiaConfig, getChiaFilePath } from "./ChiaNodeUtils";
 import { ChiaOptions, RpcClient } from "./RpcClient";
 import { CertPath } from "./types/CertPath";
 import {
@@ -32,7 +31,6 @@ class Wallet extends RpcClient {
       protocol: options?.protocol || defaultProtocol,
       hostname: options?.hostname || defaultHostname,
       port: options?.port || defaultPort,
-      ...(typeof options?.caCertPath !== 'boolean' ? { caCertPath: options?.caCertPath } : {}),
       certPath: options?.certPath as string,
       keyPath: options?.keyPath as string,
     });
