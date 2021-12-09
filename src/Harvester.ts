@@ -3,17 +3,12 @@ import {
   PlotsResponse
 } from "./types/Harvester/RpcResponse";
 import { CertPath } from "./types/CertPath";
-import { getChiaConfig, getChiaFilePath } from "./ChiaNodeUtils";
 import { ChiaOptions, RpcClient } from "./RpcClient";
 import { RpcResponse } from "./types/RpcResponse";
 
-const chiaConfig = getChiaConfig();
 const defaultProtocol = "https";
-const defaultHostname = chiaConfig?.self_hostname || "localhost";
-const defaultPort = chiaConfig?.harvester.rpc_port || 8560;
-const defaultCaCertPath = chiaConfig?.private_ssl_ca.crt;
-const defaultCertPath = chiaConfig?.daemon_ssl.private_crt;
-const defaultCertKey = chiaConfig?.daemon_ssl.private_key;
+const defaultHostname = "localhost";
+const defaultPort = 8560;
 
 class Harvester extends RpcClient {
   public constructor(options?: Partial<ChiaOptions> & CertPath) {
@@ -21,9 +16,9 @@ class Harvester extends RpcClient {
       protocol: options?.protocol || defaultProtocol,
       hostname: options?.hostname || defaultHostname,
       port: options?.port || defaultPort,
-      caCertPath: options?.caCertPath || getChiaFilePath(defaultCaCertPath),
-      certPath: options?.certPath || getChiaFilePath(defaultCertPath),
-      keyPath: options?.keyPath || getChiaFilePath(defaultCertKey),
+      ...(typeof options?.caCertPath !== 'boolean' ? { caCertPath: options?.caCertPath } : {}),
+      certPath: options?.certPath as string,
+      keyPath: options?.keyPath as string,
     });
   }
 

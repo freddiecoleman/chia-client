@@ -21,15 +21,10 @@ import { WalletInfo } from "./types/Wallet/WalletInfo";
 // @ts-ignore
 import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info_mojo } from "chia-utils";
 
-const chiaConfig = getChiaConfig();
 const defaultProtocol = "https";
-const defaultHostname = chiaConfig?.self_hostname || "localhost";
-const defaultPort = chiaConfig?.wallet.rpc_port || 9256;
+const defaultHostname = "localhost";
+const defaultPort = 9256;
 const host = "https://backup.chia.net";
-
-const defaultCaCertPath = chiaConfig?.private_ssl_ca.crt;
-const defaultCertPath = chiaConfig?.daemon_ssl.private_crt;
-const defaultCertKey = chiaConfig?.daemon_ssl.private_key;
 
 class Wallet extends RpcClient {
   public constructor(options?: Partial<ChiaOptions> & CertPath) {
@@ -37,9 +32,9 @@ class Wallet extends RpcClient {
       protocol: options?.protocol || defaultProtocol,
       hostname: options?.hostname || defaultHostname,
       port: options?.port || defaultPort,
-      caCertPath: options?.caCertPath || getChiaFilePath(defaultCaCertPath),
-      certPath: options?.certPath || getChiaFilePath(defaultCertPath),
-      keyPath: options?.keyPath || getChiaFilePath(defaultCertKey),
+      ...(typeof options?.caCertPath !== 'boolean' ? { caCertPath: options?.caCertPath } : {}),
+      certPath: options?.certPath as string,
+      keyPath: options?.keyPath as string,
     });
   }
 
