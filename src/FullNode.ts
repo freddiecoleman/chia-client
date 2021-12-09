@@ -13,17 +13,12 @@ import {
 import { ChiaOptions, RpcClient } from "./RpcClient";
 import { Block } from "./types/FullNode/Block";
 import { CertPath } from "./types/CertPath";
-import { getChiaConfig, getChiaFilePath } from "./ChiaNodeUtils";
 // @ts-ignore
 import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info_mojo } from "chia-utils";
 
-const chiaConfig = getChiaConfig();
 const defaultProtocol = "https";
-const defaultHostname = chiaConfig?.self_hostname || "localhost";
-const defaultPort = chiaConfig?.full_node.rpc_port || 8555;
-const defaultCaCertPath = chiaConfig?.private_ssl_ca.crt;
-const defaultCertPath = chiaConfig?.daemon_ssl.private_crt;
-const defaultCertKey = chiaConfig?.daemon_ssl.private_key;
+const defaultHostname = "localhost";
+const defaultPort = 8555;
 
 class FullNode extends RpcClient {
   public constructor(options?: Partial<ChiaOptions> & CertPath) {
@@ -31,9 +26,9 @@ class FullNode extends RpcClient {
       protocol: options?.protocol || defaultProtocol,
       hostname: options?.hostname || defaultHostname,
       port: options?.port || defaultPort,
-      caCertPath: options?.caCertPath || getChiaFilePath(defaultCaCertPath),
-      certPath: options?.certPath || getChiaFilePath(defaultCertPath),
-      keyPath: options?.keyPath || getChiaFilePath(defaultCertKey),
+      ...(typeof options?.caCertPath !== 'boolean' ? { caCertPath: options?.caCertPath } : {}),
+      certPath: options?.certPath as string,
+      keyPath: options?.keyPath as string,
     });
   }
 
