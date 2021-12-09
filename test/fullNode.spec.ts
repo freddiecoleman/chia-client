@@ -96,5 +96,19 @@ describe("Full Node", () => {
         "success"
       );
     });
+
+    it("calls get_puzzle_and_solution", async () => {
+      nock("https://localhost:8555")
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .post("/get_puzzle_and_solution", {
+          coin_id: "fakeCoinId",
+          height: 1000000
+        })
+        .reply(200, "success");
+
+      expect(await fullNode.getPuzzleAndSolution("fakeCoinId", 1000000)).toEqual(
+        "success"
+      );
+    });
   });
 });
