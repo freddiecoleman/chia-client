@@ -1,9 +1,7 @@
+import { Coin } from "./Coin";
+
 export interface CoinRecord {
-    coin: {
-        amount: string;
-        parent_coin_info: string;
-        puzzle_hash: string;
-    };
+    coin: Coin;
     coinbase: boolean;
     confirmed_block_index: number;
     spent: boolean;

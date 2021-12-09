@@ -1,6 +1,7 @@
 import { Block } from './Block';
 import { BlockHeader } from './BlockHeader';
 import { CoinRecord } from './CoinRecord';
+import { CoinSpend } from './CoinSpend';
 import { BlockchainState } from './BlockchainState';
 import { BlockRecord } from './BlockRecord';
 import { RpcResponse } from '../RpcResponse';
@@ -8,6 +9,10 @@ import {Connection} from "../Shared/Connection";
 
 export interface BlockchainStateResponse extends RpcResponse {
     blockchain_state: BlockchainState;
+}
+
+export interface PuzzleAndSolutionResponse extends RpcResponse {
+    coin_solution: CoinSpend[];
 }
 
 export interface UnfinishedBlockHeadersResponse extends RpcResponse {
