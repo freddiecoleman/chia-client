@@ -26,7 +26,7 @@ class RpcClient {
     this.agent = new Agent({
       cert: readFileSync(options.certPath),
       key: readFileSync(options.keyPath),
-      rejectUnauthorized: options.hostname !== "localhost",
+      rejectUnauthorized: false,
     });
   }
 
