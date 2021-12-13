@@ -7,7 +7,8 @@ jest.mock("yaml");
 describe("Wallet", () => {
   describe("RPC calls", () => {
     const wallet = new Wallet({
-      caCertPath: "/dev/null/cert.crt",
+      hostname: "localhost",
+      port: 9256,
       certPath: "/dev/null/cert.crt",
       keyPath: "/dev/null/cert.key",
     });
@@ -168,15 +169,6 @@ describe("Wallet", () => {
       expect(
         await wallet.getTransaction("fakeWalletId", "fakeTransactionId")
       ).toEqual("success");
-    });
-
-    it("calls get_transactions", async () => {
-      nock("https://localhost:9256")
-        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
-        .post("/get_transactions", { wallet_id: "fakeWalletId" })
-        .reply(200, { transactions: "success" });
-
-      expect(await wallet.getTransactions("fakeWalletId")).toEqual("success");
     });
 
     it("calls get_transactions with limit=1000", async () => {

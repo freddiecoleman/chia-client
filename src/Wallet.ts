@@ -1,5 +1,4 @@
 import { ChiaOptions, RpcClient } from "./RpcClient";
-import { CertPath } from "./types/CertPath";
 import {
   AddKeyResponse,
   GenerateMnemonicResponse,
@@ -17,22 +16,16 @@ import {
 import { Transaction } from "./types/Wallet/Transaction";
 import { WalletBalance } from "./types/Wallet/WalletBalance";
 import { WalletInfo } from "./types/Wallet/WalletInfo";
-// @ts-ignore
-import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info_mojo } from "chia-utils";
 
-const defaultProtocol = "https";
-const defaultHostname = "localhost";
-const defaultPort = 9256;
 const host = "https://backup.chia.net";
 
 class Wallet extends RpcClient {
-  public constructor(options?: Partial<ChiaOptions> & CertPath) {
+  public constructor(options: ChiaOptions) {
     super({
-      protocol: options?.protocol || defaultProtocol,
-      hostname: options?.hostname || defaultHostname,
-      port: options?.port || defaultPort,
-      certPath: options?.certPath as string,
-      keyPath: options?.keyPath as string,
+      hostname: options.hostname,
+      port: options.port,
+      certPath: options.certPath,
+      keyPath: options.keyPath
     });
   }
 
@@ -245,19 +238,6 @@ class Wallet extends RpcClient {
 
   public async createBackup(filePath: string): Promise<{}> {
     return this.request<{}>("create_backup", { file_path: filePath });
-  }
-  
-  /* https://github.com/CMEONE/chia-utils */
-  public addressToPuzzleHash(address: string): string {
-    return address_to_puzzle_hash(address);
-  }
-  
-  public puzzleHashToAddress(puzzleHash: string): string {
-    return puzzle_hash_to_address(puzzleHash);
-  }
-  
-  public getCoinInfo(parentCoinInfo: string, puzzleHash: string, amount: number): string {
-    return get_coin_info_mojo(parentCoinInfo, puzzleHash, amount);
   }
 }
 

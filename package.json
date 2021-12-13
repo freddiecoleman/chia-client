@@ -29,8 +29,7 @@
   },
   "dependencies": {
     "axios": "^0.21.2",
-    "yaml": "2.0.0-5",
-    "chia-utils": "^1.0.4"
+    "yaml": "2.0.0-5"
   },
   "jest": {
     "roots": [

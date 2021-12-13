@@ -7,7 +7,8 @@ jest.mock("yaml");
 describe("Full Node", () => {
   describe("RPC calls", () => {
     const fullNode = new FullNode({
-      caCertPath: "/dev/null/cert.crt",
+      hostname: "localhost",
+      port: 8555,
       certPath: "/dev/null/cert.crt",
       keyPath: "/dev/null/cert.key",
     });

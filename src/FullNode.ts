@@ -12,23 +12,10 @@ import {
 } from "./types/FullNode/RpcResponse";
 import { ChiaOptions, RpcClient } from "./RpcClient";
 import { Block } from "./types/FullNode/Block";
-import { CertPath } from "./types/CertPath";
-// @ts-ignore
-import { address_to_puzzle_hash, puzzle_hash_to_address, get_coin_info_mojo } from "chia-utils";
-
-const defaultProtocol = "https";
-const defaultHostname = "localhost";
-const defaultPort = 8555;
 
 class FullNode extends RpcClient {
-  public constructor(options?: Partial<ChiaOptions> & CertPath) {
-    super({
-      protocol: options?.protocol || defaultProtocol,
-      hostname: options?.hostname || defaultHostname,
-      port: options?.port || defaultPort,
-      certPath: options?.certPath as string,
-      keyPath: options?.keyPath as string,
-    });
+  public constructor(options: ChiaOptions) {
+    super(options);
   }
 
   public async getBlockchainState(): Promise<BlockchainStateResponse> {
@@ -130,19 +117,6 @@ class FullNode extends RpcClient {
 
   public async getNetworkInfo(): Promise<{}> {
     return this.request<{}>("get_network_info", {});
-  }
-  
-  /* https://github.com/CMEONE/chia-utils */
-  public addressToPuzzleHash(address: string): string {
-    return address_to_puzzle_hash(address);
-  }
-  
-  public puzzleHashToAddress(puzzleHash: string): string {
-    return puzzle_hash_to_address(puzzleHash);
-  }
-  
-  public getCoinInfo(parentCoinInfo: string, puzzleHash: string, amount: number): string {
-    return get_coin_info_mojo(parentCoinInfo, puzzleHash, amount);
   }
 }
 
