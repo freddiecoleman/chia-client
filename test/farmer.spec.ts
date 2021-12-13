@@ -7,7 +7,8 @@ jest.mock("yaml");
 describe("Farmer", () => {
   describe("RPC calls", () => {
     const farmer = new Farmer({
-      caCertPath: "/dev/null/cert.crt",
+      hostname: "localhost",
+      port: 8559,
       certPath: "/dev/null/cert.crt",
       keyPath: "/dev/null/cert.key",
     });
