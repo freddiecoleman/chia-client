@@ -7,6 +7,8 @@ jest.mock("yaml");
 describe("Harvester", () => {
   describe("RPC calls", () => {
     const harvester = new Harvester({
+      hostname: "localhost",
+      port: 8560,
       caCertPath: "/dev/null/cert.crt",
       certPath: "/dev/null/cert.crt",
       keyPath: "/dev/null/cert.key",

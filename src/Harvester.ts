@@ -2,22 +2,17 @@ import {
   PlotDirectoriesResponse,
   PlotsResponse
 } from "./types/Harvester/RpcResponse";
-import { CertPath } from "./types/CertPath";
 import { ChiaOptions, RpcClient } from "./RpcClient";
 import { RpcResponse } from "./types/RpcResponse";
 
-const defaultProtocol = "https";
-const defaultHostname = "localhost";
-const defaultPort = 8560;
 
 class Harvester extends RpcClient {
-  public constructor(options?: Partial<ChiaOptions> & CertPath) {
+  public constructor(options: ChiaOptions) {
     super({
-      protocol: options?.protocol || defaultProtocol,
-      hostname: options?.hostname || defaultHostname,
-      port: options?.port || defaultPort,
-      certPath: options?.certPath as string,
-      keyPath: options?.keyPath as string,
+      hostname: options.hostname,
+      port: options.port,
+      certPath: options.certPath,
+      keyPath: options.keyPath
     });
   }
 
