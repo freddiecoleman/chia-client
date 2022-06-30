@@ -31,7 +31,7 @@ import { Wallet } from 'chia-client';
 const wallet = new Wallet({
     protocol: 'https',
     hostname: 'localhost',
-    port: 8555
+    port: 9256
 });
 
 const mnemonic = await wallet.generateMnemonic();
